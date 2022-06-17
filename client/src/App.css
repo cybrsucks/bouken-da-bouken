@@ -43,6 +43,17 @@
 
 }
 
-.user h3 {
-  margin: 20px;
+.user p {
+  margin: 5px;
+  font-size: 12px;
+
+}
+
+
+.FaHome {
+  color: black;  
+}
+
+.FaHome :hover{
+  color: grey;  
 }
