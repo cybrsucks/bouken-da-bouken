@@ -8,9 +8,9 @@ CREATE TABLE `user` (
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `user` (`id`, `username`, `age`, `password`, `email`) VALUES (1, 'admin', 20, 'wz', 'admin@min.com');
-INSERT INTO `user` (`id`, `username`, `age`, `password`, `email`) VALUES (2, 'test', 22, 'test', 'test@test.com');
-INSERT INTO `user` (`id`, `username`, `age`, `password`, `email`) VALUES (3, 'vest', 23, 'vest', 'vest@test.com');
+INSERT INTO `user` (`id`, `username`, `age`, `password`, `email`, `active`) VALUES (1, 'admin', 20, 'wz', 'admin@min.com', 1);
+INSERT INTO `user` (`id`, `username`, `age`, `password`, `email`, `active`) VALUES (2, 'test', 22, 'test', 'test@test.com', 1);
+INSERT INTO `user` (`id`, `username`, `age`, `password`, `email`, `active`) VALUES (3, 'vest', 23, 'vest', 'vest@test.com', 1);
 
 select * from user;
 delete from user where id > 0;

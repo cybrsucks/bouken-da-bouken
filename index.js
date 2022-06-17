@@ -19,7 +19,7 @@ app.post('/create', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    db.query('INSERT INTO user (username, age, email, password) VALUES (?, ?, ?, ?)', [name, age, email, password], (err, result) => {
+    db.query('INSERT INTO user (username, age, email, password, active) VALUES (?, ?, ?, ?)', [name, age, email, password, 1], (err, result) => {
         if (err) {
             console.log(err)
         }
@@ -49,7 +49,7 @@ app.post('/login', (req, res) => {
             console.log(err)
         }
         else{
-            res.send(result)
+            // res.send(result)
             res.send("Credentials are correct")
         }
     })
