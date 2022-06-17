@@ -40,7 +40,6 @@
   padding: 10px;
   font-family: 'Courier New', Courier, monospace;
   flex-direction: column;
-
 }
 
 .user p {
@@ -48,7 +47,6 @@
   font-size: 12px;
 
 }
-
 
 .FaHome {
   color: black;  
