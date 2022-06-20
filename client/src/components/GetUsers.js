@@ -17,6 +17,7 @@ function GetUsers() {
         {userList.map((val, key) => {
         return (
             <div className="user">
+                <p>{val.id}</p>
                 <p>{val.username}</p>
                 <p>{val.age}</p>
                 <p>{val.email}</p>

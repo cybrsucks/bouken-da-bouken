@@ -8,7 +8,7 @@ function CreateUser() {
     const [password, setPassword] = useState('');
 
     const CreateUser = () => {
-    Axios.post('http://localhost:3001/create', {
+    Axios.post('http://localhost:3001/CreateUser', {
         name: name,
         age: age,
         email: email,

@@ -2,9 +2,13 @@ const express = require("express");
 const app = express();
 const mysql = require('mysql');
 const cors = require("cors");
+const { response, request } = require("express");
+var bodyParser = require('body-parser')
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }))
+
 
 const db = mysql.createConnection({
     user:"root",
@@ -13,7 +17,7 @@ const db = mysql.createConnection({
     database: "studydb"
 });
 
-app.post('/create', (req, res) => {
+app.post('/createUser', (req, res) => {
     const name = req.body.name;
     const age = req.body.age;
     const email = req.body.email;
@@ -54,6 +58,25 @@ app.post('/login', (req, res) => {
         }
     })
 })
+
+app.post('/updateEmail', (req, res) => {
+    const id = req.body.id;
+    const email = req.body.email;
+    console.log(req.body)
+    db.query("UPDATE user SET email = ? WHERE id = ?", [email, id], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        else{
+            res.send(result)
+        }
+    })
+})
+
+
+// app.delete(){
+
+// }
 
 app.listen(3001, () => {
     console.log("noot noot \nmysql db is live \nnoot noot noot noot noot noot noot noot noot noot");
