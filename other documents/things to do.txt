@@ -1,0 +1,8 @@
+1. Create the login screen [DONE]
+	a. Redirect user after login to main menu
+2. Create a main menu screen with the “User Management” Option
+	a. Redirect to User Management
+3. Create the following functions under the User Management
+	a. Create new User [DONE]
+	b. Update password for current login user
+	c. Update email information

@@ -23,7 +23,7 @@ app.post('/createUser', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    db.query('INSERT INTO user (username, age, email, password, active) VALUES (?, ?, ?, ?)', [name, age, email, password, 1], (err, result) => {
+    db.query('INSERT INTO user (username, age, email, password) VALUES (?, ?, ?, ?)', [name, age, email, password], (err, result) => {
         if (err) {
             console.log(err)
         }
