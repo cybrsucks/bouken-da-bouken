@@ -21,8 +21,3 @@ delete from user where id > 0;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 flush privileges;
 
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_current_password';
-
-create user nodeuser@localhost identified by 'nodeuser@1234';
-grant all privileges on node.* to nodeuser@localhost;
-ALTER USER 'nodeuser'@localhost IDENTIFIED WITH mysql_native_password BY 'nodeuser@1234';

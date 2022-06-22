@@ -1,5 +1,5 @@
 //  tutorial.model.js
-const sql = require("./database.js");
+const sql = require("../database");
 
 // constructor
 // const User = function(user) {
