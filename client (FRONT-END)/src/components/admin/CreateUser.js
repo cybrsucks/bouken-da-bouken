@@ -8,7 +8,7 @@ function CreateUser() {
     const [password, setPassword] = useState('');
 
     const CreateUser = () => {
-    Axios.post('http://localhost:3001/CreateUser', {
+    Axios.post('http://localhost:3001/user/create', {
         name: name,
         age: age,
         email: email,
@@ -21,6 +21,7 @@ function CreateUser() {
     
 
     return (
+        // to-do: all html to create html files under pages, call header and page html in here 
     <div className="information">
     <label>Username:</label>
         <input type="text" onChange={(event) => { setName(event.target.value) }} />

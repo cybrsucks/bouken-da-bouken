@@ -15,7 +15,7 @@ function UpdateEmail() {
     const UpdateEmail = (id) => {
         Axios.post("http://localhost:3001/UpdateEmail", { email: newEmail, id: id }).then(
             (response) => {
-                alert('what')
+                alert('what') 
             }
         ).catch ((err) => {
             console.log(err)
