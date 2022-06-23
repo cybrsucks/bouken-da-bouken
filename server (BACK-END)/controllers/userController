@@ -49,8 +49,6 @@ exports.user_creation = (req, res) => {
 
 exports.user_All = (req, res) => {
 
-    console.log("exports.user_All")
-
     User.selectAll((err, data) => {
         if (err) {
             if (err.kind === "not_found") {
