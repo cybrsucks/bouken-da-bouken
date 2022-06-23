@@ -7,14 +7,12 @@ const connectDatabase = mysql.createConnection({
         user: dbConfig.USER,
         password: dbConfig.PASSWORD,
         host: dbConfig.HOST,
-        database: dbConfig.DATABASE
+        database: dbConfig.DB
     });
 
 connectDatabase.connect(function(err){
     if (err) throw err;
-    console.log(
-
-    );
+    console.log(`db is live`);
 });
 
 module.exports = connectDatabase;
