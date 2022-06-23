@@ -15,6 +15,7 @@ function App() {
     <><Header />
     <div>
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/user/updateEmail" element={<UpdateEmail />} />        
         <Route path="/login" element={<Login />} />
         <Route path="/getUsers" element={<GetUsers />} />

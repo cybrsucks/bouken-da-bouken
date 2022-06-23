@@ -6,6 +6,7 @@
   
   router.post("/user/create", userController.user_creation); //working
   router.get("/getUsers", userController.user_All); //working
+  router.post("/", userController.login);
   router.post("/login", userController.login);
   router.get("/dashboard", userController.dashboard);
 
