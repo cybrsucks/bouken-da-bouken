@@ -1,13 +1,14 @@
-import React, {
-    useState
-} from "react";
+import React, { useState } from "react";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [username, setName] = useState("");
     const [password, setPassword] = useState("");
 
     const [err, setError] = useState("");
+
+    let navigate = useNavigate();
 
     const Login = () => {
         if (username === "" || password === "") {
@@ -20,6 +21,7 @@ function Login() {
             })
             .then((response) => {
                 console.log(response);
+                navigate("/dashboard");
                 // response.data;
             })
             .catch((err) => {

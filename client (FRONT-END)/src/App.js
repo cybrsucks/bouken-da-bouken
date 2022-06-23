@@ -8,6 +8,7 @@ import GetUsers from "./components/admin/GetUsers"
 import CreateUser from "./components/admin/CreateUser"
 import Header from "./components/Header"
 import UpdateEmail from "./components/UpdateEmail"
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/getUsers" element={<GetUsers />} />
         <Route path="/user/create" element={<CreateUser />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div></>
   )
