@@ -71,7 +71,6 @@ User.selectAll = (result) => {
 };
 
 User.authentication = (uname, pwd, result) => {
-    console.log(username, password);
     sql.query(`SELECT * FROM user where username = "${uname}" and password = "${pwd}"`, (err, res) => { 
         if (err) {
             console.log("error: ", err);
