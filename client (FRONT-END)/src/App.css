@@ -15,20 +15,22 @@
 
 .information input {
   width: 300px;
-  height: 20px;
+  height: 40px;
   padding-left: 10px;
   margin: 5px;
 }
 
 .information button { 
-  width: 300px;
+  width: 200px;
   height: 30px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
 .information button:hover { 
-  cursor: pointer
+  cursor: pointer;
+  background-color: grey;
+  color: white;
 }
 
 .user{
@@ -48,10 +50,10 @@
 
 }
 
-.FaHome {
+.FaaHome {
   color: black;  
 }
 
-.FaHome :hover{
+.FaaHome :hover{
   color: grey;  
 }
