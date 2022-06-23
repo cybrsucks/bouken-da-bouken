@@ -2,18 +2,18 @@ import React, { useState } from "react"
 import Axios from "axios"
 
 function Login() {
-    const [name, setName] = useState('');
+    const [username, setName] = useState('');
     const [password, setPassword] = useState('');
 
     const [error, setError] = useState("");
 
     const Login = () => {
-    if (name === "" || password === "") {
+    if (username === "" || password === "") {
         setError("Fields are required");
         return;
     }
     Axios.post('http://localhost:3001/Login', {
-        name: name,
+        username: username,
         password: password,
     }).then(() => {
         console.log("Login Success");

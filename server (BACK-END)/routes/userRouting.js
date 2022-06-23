@@ -5,12 +5,10 @@
   const userController = require("../controllers/userController");
   
 
-  router.get("/user_list", userController.user_list);
-  router.post("/user/create", userController.user_creation);
+  router.get("/user_list", userController.user_list); //working
+  router.post("/user/create", userController.user_creation); //working
+  router.get("/getUsers", userController.user_All); //working
   router.post("/user/updateEmail", userController.update_email);
-
-
-  // router.post("/controller", userController.user_list);
 
 
 module.exports = router;

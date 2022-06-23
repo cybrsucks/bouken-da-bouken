@@ -2,14 +2,14 @@ import React, { useState } from "react"
 import Axios from "axios"
 
 function CreateUser() {
-    const [name, setName] = useState('');
+    const [username, setName] = useState('');
     const [age, setAge] = useState(0);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const CreateUser = () => {
     Axios.post('http://localhost:3001/user/create', {
-        name: name,
+        username: username,
         age: age,
         email: email,
         password: password,

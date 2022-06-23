@@ -12,7 +12,7 @@ const connectDatabase = mysql.createConnection({
 
 connectDatabase.connect(function(err){
     if (err) throw err;
-    console.log(`db is live`);
+    console.log(`(ﾉಠдಠ)ﾉ︵┻━┻  𝕕𝕓.𝕛𝕤\n`);
 });
 
 module.exports = connectDatabase;
