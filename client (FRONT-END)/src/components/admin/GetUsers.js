@@ -5,7 +5,7 @@ function GetUsers() {
     const [userList, setUserList] = useState([]);
 
     const GetUsers = () => {
-        Axios.get("http://localhost:3001/GetUsers").then((response) => {
+        Axios.get("http://localhost:3001/getUsers").then((response) => {
             setUserList(response.data);
         })
     }
