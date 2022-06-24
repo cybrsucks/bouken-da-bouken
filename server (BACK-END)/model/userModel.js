@@ -1,4 +1,6 @@
 const sql = require("../database.js");
+const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
 
 // constructor
 const User = function(user) {
@@ -9,14 +11,29 @@ const User = function(user) {
 };
 
 //  called by exports.user_creation in userController  
-User.create = (newUser, res) => {
-    sql.query(`INSERT INTO user SET ?`, newUser, (err, res) => {
+User.create = async (newUser, result) => {
+    const { username, age, email, password } = newUser;
+    encryptedPassword = await bcrypt.hash(password, 10);
+    sql.query(`INSERT INTO user SET ?`, [{username, age, email, encryptedPassword}], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
         }
+
+        // Create token
+        const token = jwt.sign({user_id: username, email}, "hello",{expiresIn: "2h"});
+
+        // save user token
+        User.token = token;
+
+        console.log(token);
+
+        // return new user
         console.log(`INFO: user created successfully with: `, {id: res.insertId, ...newUser});
+        result(null, res);
+        return;
+
     });
 };
 
@@ -37,7 +54,7 @@ User.selectAll = (result) => {
 };
 
 User.authentication = (uname, pwd, result) => {
-    sql.query(`SELECT * FROM user where username = "${uname}" and password = "${pwd}"`, (err, res) => { 
+    sql.query(`SELECT * FROM user where username = "${uname}" and encryptedPassword = "${pwd}"`, (err, res) => { 
         if (err) {
             console.log("error: ", err);
             result(err, null); 

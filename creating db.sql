@@ -3,19 +3,21 @@ CREATE TABLE `user` (
   `username` varchar(45) DEFAULT NULL,
   `age` int DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
+  `encryptedPassword` varchar(100) DEFAULT NULL,
+  `token` varchar(100) DEFAULT NULL,
   `active` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-INSERT INTO `user` (`id`, `username`, `age`, `password`, `email`, `active`) VALUES (1, 'admin', 20, 'wz', 'admin@min.com', 1);
-INSERT INTO `user` (`id`, `username`, `age`, `password`, `email`, `active`) VALUES (2, 'test', 22, 'test', 'test@test.com', 1);
-INSERT INTO `user` (`id`, `username`, `age`, `password`, `email`, `active`) VALUES (3, 'vest', 23, 'vest', 'vest@test.com', 1);
-INSERT INTO `user` (`id`, `username`, `age`, `password`, `email`, `active`) VALUES (4, 'west', 24, 'west', 'west@test.com', 0);
+INSERT INTO `user` (`id`, `username`, `age`, `encryptedPassword`, `email`, `active`) VALUES (1, 'admin', 20, '$2a$10$Eg4nZZ1gH35ppkWOmtpaUueXKft.C.N1OVfz0i7A2AwMw/8zt6cye', 'admin@min.com', 1);
+INSERT INTO `user` (`id`, `username`, `age`, `encryptedPassword`, `email`, `active`) VALUES (2, 'test', 22, '$2a$10$ZS1jbeW16OAzm1trFxP6LOQmnPXIloilqjnob0fD09sxsaHvjIjxe', 'test@test.com', 1);
+INSERT INTO `user` (`id`, `username`, `age`, `encryptedPassword`, `email`, `active`) VALUES (3, 'best', 23, '$2a$10$wAZdxjwiTZ0DtkKuBbSge.MzE8fTS1bli6/NwiJOZVncEGvjjCTZK', 'best@test.com', 1);
+INSERT INTO `user` (`id`, `username`, `age`, `encryptedPassword`, `email`, `active`) VALUES (4, 'west', 24, 'west', 'west@test.com', 0);
 
 select * from user;
+SELECT * FROM user where username = "admin" and password = "wz";
 delete from user where id > 0;
 
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';

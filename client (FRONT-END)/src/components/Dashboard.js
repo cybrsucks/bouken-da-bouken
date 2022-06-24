@@ -2,17 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-    // let navigate = useNavigate();
-    
-    // const token = localStorage.getItem("loggedIn");
-    // console.log(token);
-
-    // useEffect(() => {
-    //     if (token !== 'yes'){
-    //         navigate("/login");  
-    //     }
-    // })
-
     return (
     <div className="information">
         <div className="container">
