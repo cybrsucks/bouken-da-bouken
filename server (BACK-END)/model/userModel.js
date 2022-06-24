@@ -32,6 +32,7 @@ User.create = async (newUser, result) => {
         // return new user
         console.log(`INFO: user created successfully with: `, {id: res.insertId, ...newUser});
         result(null, res);
+        // console.log(res)
         return;
 
     });
@@ -53,8 +54,16 @@ User.selectAll = (result) => {
     });
 };
 
-User.authentication = (uname, pwd, result) => {
-    sql.query(`SELECT * FROM user where username = "${uname}" and encryptedPassword = "${pwd}"`, (err, res) => { 
+//  called by exports.login in userController  
+User.authentication = async (uname, pwd, result) => {
+    // use bcrypt.compare
+    // encryptedPwd = await bcrypt.hash(pwd, 10);
+    // console.log(encryptedPwd)
+    sql.query(`SELECT encryptedPassword FROM user where username = "${uname}"`, (err, res) => { 
+        console.log(res);
+        if (encryptedPwd !== res.encryptedPassword){
+            err = "INFO: Username/Password is incorrect"
+        }
         if (err) {
             console.log("error: ", err);
             result(err, null); 

@@ -23,7 +23,9 @@ exports.user_creation = (req, res) => {
 
         } else {
             console.log("dory")
-            res.send("data"); // sends data to front-end
+            // res.send("data"); 
+            res.status(200).send(data); // sends data to front-end
+    
 
         }
         
