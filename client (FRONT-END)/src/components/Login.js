@@ -7,6 +7,7 @@ function Login() {
     const [password, setPassword] = useState("");
 
     const [err, setError] = useState("");
+    const [user, setUser] = useState();
 
     let navigate = useNavigate();
 
@@ -20,7 +21,12 @@ function Login() {
                 password: password,
             })
             .then((response) => {
-                console.log(response);
+                console.log(response.data);
+                setUser(response.data);
+
+                if (localStorage.loggedIn === undefined) {
+                    localStorage.setItem('user', response.data);
+                }
                 navigate("/dashboard");
                 // response.data;
             })

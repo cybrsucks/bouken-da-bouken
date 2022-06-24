@@ -46,7 +46,6 @@ User.authentication = (uname, pwd, result) => {
         if (res.length){
             console.log("INFO: Login details are correct")
             result(null, res); //returns null err and result object
-            // result.redirect('/home');
             return;
         }else{
             // console.log("INFO: Username/Password is incorrect")

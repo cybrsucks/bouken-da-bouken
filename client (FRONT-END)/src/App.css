@@ -57,3 +57,7 @@
 .FaaHome :hover{
   color: grey;  
 }
+
+form {
+  text-align: center;
+}

@@ -1,4 +1,5 @@
 const User = require("../model/userModel");
+const session = require('express-session')
 
 exports.user_creation = (req, res) => {
 
@@ -51,7 +52,6 @@ exports.login = (req, res) => {
             message: "Content can not be empty!"
         });
     }
-
     // console.log(req.body);
     username = req.body.username;
     password = req.body.password;
@@ -68,7 +68,6 @@ exports.login = (req, res) => {
 };
 
 exports.dashboard = (req, res) => {
-    res.send("redirected");
 };
 
 exports.update_email = (req, res) => {
