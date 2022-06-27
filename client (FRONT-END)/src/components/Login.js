@@ -25,7 +25,9 @@ function Login() {
                 setUser(response.data);
 
                 if (localStorage.loggedIn === undefined) {
-                    localStorage.setItem('user', response.data);
+                    // alert(response.data.token)
+                    localStorage.setItem('JWT_token', response.data.token);
+                    localStorage.setItem('user', response.data.username);
                 }
                 navigate("/dashboard");
                 // response.data;

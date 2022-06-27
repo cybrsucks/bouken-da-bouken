@@ -22,7 +22,7 @@ exports.user_creation = (req, res) => {
             });
 
         } else {
-            console.log("dory")
+            // console.log("dory")
             // res.send("data"); 
             res.status(200).send(data); // sends data to front-end
     
@@ -63,9 +63,14 @@ exports.login = (req, res) => {
         if (err) {
             console.log(err);
             res.status(400).send("Invalid Credentials");
-        } else {
+        } else {   
+            // console.log("door")
+            // console.log(data)
+
+            res.status(200).json(data); // sends data  + JWT to front-end
             // res.status(200).send(data); // sends data to front-end
-            res.redirect("/dashboard");
+
+            // res.redirect("/dashboard");
         }
     })
 };
