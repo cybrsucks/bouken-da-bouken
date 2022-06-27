@@ -2,13 +2,11 @@ const User = require("../model/userModel");
 const session = require('express-session')
 
 exports.user_creation = (req, res) => {
-
     if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
     }
-
     const user = new User({
         username: req.body.username,
         age: req.body.age,
@@ -23,7 +21,13 @@ exports.user_creation = (req, res) => {
                 err.message || "Some error occurred while creating the User."
             });
 
-        }else res.send(data); // sends data to front-end
+        } else {
+            // console.log("dory")
+            // res.send("data"); 
+            res.status(200).send(data); // sends data to front-end
+    
+
+        }
         
     })
 };
@@ -46,7 +50,6 @@ exports.user_All = (req, res) => {
 };
 
 exports.login = (req, res) => {
-
     if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -60,9 +63,14 @@ exports.login = (req, res) => {
         if (err) {
             console.log(err);
             res.status(400).send("Invalid Credentials");
-        } else {
+        } else {   
+            // console.log("door")
+            // console.log(data)
+
+            res.status(200).json(data); // sends data  + JWT to front-end
             // res.status(200).send(data); // sends data to front-end
-            res.redirect("/dashboard");
+
+            // res.redirect("/dashboard");
         }
     })
 };

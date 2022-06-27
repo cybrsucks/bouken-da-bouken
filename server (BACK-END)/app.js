@@ -6,6 +6,8 @@ const router = require("./routes/userRouting");
 const app = express();
 const session = require('express-session');
 
+const auth = require("./auth");
+
 // Add headers before the routes are defined
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
