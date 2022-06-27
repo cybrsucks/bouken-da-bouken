@@ -12,6 +12,13 @@ function Login() {
     let navigate = useNavigate();
 
     const Login = () => {
+        const keyToken = localStorage.getItem("JWT_token");
+
+        if (keyToken) {
+            navigate("/dashboard");
+        }
+
+
         if (username === "" || password === "") {
             setError("Fields are required");
             return;
