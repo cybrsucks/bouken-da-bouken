@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Axios from "axios"
 
 function Dashboard() {
+    Axios.get("http://localhost:3001/dashboard",  { withCredentials: true })
+        .then((response) => {
+            document.getElementById("welcomeBanner").innerHTML = response.data;
+        })
+
     return (
     <div className="information">
         <div className="container">
+            <h5> Welcome, <span id="welcomeBanner"> username </span> ! </h5>
             <div className="row align-items-center" style={{height: '100px'}}>
                 <div className="col">
                     <div>

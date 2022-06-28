@@ -13,7 +13,7 @@ function UpdateEmail() {
     const [userDetails, showUserDetails] = useState([]);
     const currentUser = localStorage.getItem("currentUser");
     const UserDetails = () => {
-        Axios.get("http://localhost:3001/userDetails", {params: {currentUser: currentUser}}).then((response) => {
+        Axios.get("http://localhost:3001/userDetails").then((response) => {
             showUserDetails(response.data);
         })
     }

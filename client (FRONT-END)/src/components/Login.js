@@ -11,32 +11,30 @@ function Login() {
     let navigate = useNavigate();
 
     const Login = () => {
-        const keyToken = localStorage.getItem("JWT_token");
-
-        if (keyToken) {
+        if (localStorage.JWT_token){
             navigate("/dashboard");
         }
-
 
         if (username === "" || password === "") {
             setError("Fields are required");
             return;
         }
+
         Axios.post("http://localhost:3001/login", {
                 username: username,
                 password: password,
-            })
+            },{ withCredentials: true })
             .then((response) => {
                 console.log(response.data);
 
+                // remove this to disallow JWT_token in localStorage
                 if (localStorage.JWT_token === undefined) {
                     // alert(response.data.token)
                     console.log(response.data);
                     localStorage.setItem('JWT_token', response.data.token);
                     localStorage.setItem('username', response.data.username);
+                    navigate("/dashboard");
                 }
-                navigate("/dashboard");
-                // response.data;
             })
             .catch((err) => {
                 console.log(err);

@@ -65,18 +65,30 @@ exports.login = (req, res) => {
         if (err) {
             console.log(err);
             res.status(400).send("Invalid Credentials");
-        } else {   
-            sendToken(data, 200, res)
-            
+        } else {
+            res.cookie("JWT", data.token)
+            // res.status(200).send(data).cookie("JWT", data.token); // sends data to front-end
             // res.status(200).send(data); // sends data to front-end
-
-            // res.redirect("/dashboard");
+            res.status(200).redirect("/dashboard");
         }
     })
 };
 
 exports.dashboard = (req, res) => {
-    
+    // const jwt_cookie = req.cookies.JWT;
+    console.log("Cookies: ", req.cookies);
+    // res.end()
+    const token = req.cookies.JWT;
+    if (token) {
+        jwt.verify(token, 'hello', async (err, decodedToken) => {
+            const currentUser = decodedToken.username;
+            console.log("Current User: ", currentUser);
+            res.send(currentUser);
+        });
+    } else {
+        console.log('JWT cookie not found')
+    }
+    return;
 };
 
 exports.update_email = (req, res) => {
