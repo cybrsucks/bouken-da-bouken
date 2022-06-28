@@ -74,35 +74,27 @@ User.selectAll = (result) => {
 
 //  called by exports.login in userController
 User.authentication = (uname, pwd, result) => {
-    // if (!(uname && pwd)) {
-    //     res.status(400).send("All input is required");
-    // }
     hashedPwd = crypto.createHmac('sha256', secret).update(pwd).digest('hex');
 
     sql.query(`SELECT * FROM user where username = "${uname}"`, (err, res) => {
-        // console.log(hashedPwd);
         const User = res[0];
-        // console.log(User.encryptedPassword);
 
         // if (res.length && bcrypt.compare(pwd, User.encryptedPassword)) {
             if (res.length && hashedPwd === User.encryptedPassword){
             console.log("INFO: Login details are correct");
 
             console.log(uname)
+
             // creates JWT token
-            
             const token = jwt.sign({ username: User.username }, "hello", {expiresIn: "2h"})
-            console.log("token: ", token)
 
             // save user token
             User.token = token;
 
             console.log("Login User.token: " + User.token);
-            console.log();
-            console.log();
-            console.log();
-            // console.log("User object: " + User);
-            // console.log(res);  // res refers to the User object [Object object] containing * info for the user found in db
+
+            // console.log("User object: " + User); // refers to the User object [Object object] containing * info for the user found in db
+            // console.log(res);  
 
             result(null, res[0]); //returns null err and result object
             return;

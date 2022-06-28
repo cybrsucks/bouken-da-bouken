@@ -7,7 +7,6 @@ function Login() {
     const [password, setPassword] = useState("");
 
     const [err, setError] = useState("");
-    const [user, setUser] = useState();
 
     let navigate = useNavigate();
 
@@ -29,12 +28,12 @@ function Login() {
             })
             .then((response) => {
                 console.log(response.data);
-                setUser(response.data);
 
-                if (localStorage.loggedIn === undefined) {
+                if (localStorage.JWT_token === undefined) {
                     // alert(response.data.token)
+                    console.log(response.data);
                     localStorage.setItem('JWT_token', response.data.token);
-                    localStorage.setItem('user', response.data.username);
+                    localStorage.setItem('username', response.data.username);
                 }
                 navigate("/dashboard");
                 // response.data;

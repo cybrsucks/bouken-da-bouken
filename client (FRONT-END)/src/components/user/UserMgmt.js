@@ -8,7 +8,7 @@ function UserMgmt() {
             <div className="row align-items-center" style={{height: '100px'}}>
                 <div className="col">
                     <div>
-                        <Link to="/user/changePassword" class="dashboard-link">
+                        <Link to="/user/changePassword" className="dashboard-link">
                             <div>
                             Change Password
                             </div>
@@ -17,7 +17,7 @@ function UserMgmt() {
                 </div>
                 <div className="col">
                     <div>
-                        <Link to="/user/updateEmail" class="dashboard-link">
+                        <Link to="/user/updateEmail" className="dashboard-link">
                             <div>
                             Update Email
                             </div>

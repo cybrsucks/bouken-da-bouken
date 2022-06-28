@@ -8,7 +8,7 @@ function Dashboard() {
             <div className="row align-items-center" style={{height: '100px'}}>
                 <div className="col">
                     <div>
-                        <Link to="/user/manage/" class="dashboard-link">
+                        <Link to="/user/manage/" className="dashboard-link">
                             <div>
                             User Management 
                             </div>
@@ -17,7 +17,7 @@ function Dashboard() {
                 </div>
                 <div className="col">
                     <div>
-                        <Link to="/group/manage" class="dashboard-link">
+                        <Link to="/group/manage" className="dashboard-link">
                             <div>
                             Group Management 
                             </div>

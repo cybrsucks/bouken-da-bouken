@@ -66,11 +66,8 @@ exports.login = (req, res) => {
             console.log(err);
             res.status(400).send("Invalid Credentials");
         } else {   
-            // console.log("door")
-            console.log(data)
-            
             sendToken(data, 200, res)
-
+            
             // res.status(200).send(data); // sends data to front-end
 
             // res.redirect("/dashboard");
