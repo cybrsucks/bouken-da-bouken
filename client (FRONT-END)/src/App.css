@@ -50,14 +50,15 @@
 
 }
 
-.FaaHome {
+.hover-link svg {
   color: black;  
 }
 
-.FaaHome :hover{
+.hover-link svg :hover{
   color: grey;  
 }
 
-form {
+.dashboard-link {
   text-align: center;
+  height: 50px;
 }

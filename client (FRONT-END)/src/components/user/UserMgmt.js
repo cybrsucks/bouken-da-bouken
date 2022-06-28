@@ -1,33 +1,34 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-function Dashboard() {
+function UserMgmt() {
     return (
-    <div className="information">
+        <div className="information">
         <div className="container">
             <div className="row align-items-center" style={{height: '100px'}}>
                 <div className="col">
                     <div>
-                        <Link to="/user/manage/" class="dashboard-link">
+                        <Link to="/user/changePassword" class="dashboard-link">
                             <div>
-                            User Management 
+                            Change Password
                             </div>
                         </Link>
                     </div> 
                 </div>
                 <div className="col">
                     <div>
-                        <Link to="/group/manage" class="dashboard-link">
+                        <Link to="/user/updateEmail" class="dashboard-link">
                             <div>
-                            Group Management 
+                            Update Email
                             </div>
                         </Link>
                     </div> 
                 </div>
             </div>
         </div>
-    </div> 
+        </div> 
+
     )
 }
 
-export default Dashboard;
+export default UserMgmt;

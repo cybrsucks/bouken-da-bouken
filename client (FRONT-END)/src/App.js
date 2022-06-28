@@ -7,8 +7,9 @@ import Login from "./components/Login"
 import GetUsers from "./components/admin/GetUsers"
 import CreateUser from "./components/admin/CreateUser"
 import Header from "./components/Header"
-import UpdateEmail from "./components/UpdateEmail"
+import UpdateEmail from "./components/user/UpdateEmail"
 import Dashboard from "./components/Dashboard";
+import UserMgmt from "./components/user/UserMgmt";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -16,8 +17,7 @@ function App() {
     <><Header />
     <div>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/user/updateEmail" element={<UpdateEmail />} />        
+        <Route path="/" element={<Login />} />     
         <Route path="/login" element={<Login />} />
         <Route path="/getUsers" element={<GetUsers />} />
         <Route path="/user/create" element={<CreateUser />} />
@@ -25,7 +25,12 @@ function App() {
         <ProtectedRoute>
           <Dashboard />
           </ProtectedRoute> 
-        }/>
+        }/> 
+        // incomplete/TODO: logged in user can still access login input page
+
+        <Route path="/user/manage" element={<UserMgmt />} />
+        <Route path="/user/updateEmail" element={<UpdateEmail />} />   
+        {/* <Route path="/user/changePassword" element={<ChangePassword />} /> */}
       </Routes>
     </div></>
   )

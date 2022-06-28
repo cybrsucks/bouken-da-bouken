@@ -2,11 +2,19 @@ import React, { useState } from "react"
 import Axios from "axios"
 
 function UpdateEmail() {
-    const [userList, setUserList] = useState([]);
+    // const [userList, setUserList] = useState([]);
 
-    const ListUsers = () => {
-        Axios.get("http://localhost:3001/getUsers").then((response) => {
-            setUserList(response.data);
+    // const ListUsers = () => {
+    //     Axios.get("http://localhost:3001/getUsers").then((response) => {
+    //         setUserList(response.data);
+    //     })
+    // }
+
+    const [userDetails, showUserDetails] = useState([]);
+    const currentUser = localStorage.getItem("currentUser");
+    const UserDetails = () => {
+        Axios.get("http://localhost:3001/userDetails", {params: {currentUser: currentUser}}).then((response) => {
+            showUserDetails(response.data);
         })
     }
 
@@ -24,8 +32,8 @@ function UpdateEmail() {
 
     return (
         <div className="information">
-        <button onClick={ListUsers}>List User</button> 
-            {userList.map((val, key) => {
+        <button onClick={UserDetails}>Display User Details</button> 
+            {userDetails.map((val, key) => {
             return (
                 <div className="user" key={key}>
                     <div>
