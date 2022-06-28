@@ -11,9 +11,9 @@ router.post("/", userController.login); // working
 router.post("/login", userController.login); // working
 router.get("/dashboard", verifyToken, userController.dashboard);
 router.get("/user/manage")
-router.get("/userDetails", userController.user_details);
+// router.get("/userDetails", userController.user_details);
 
-router.post("/user/updateEmail", userController.update_email);
+router.post("/UpdateEmail", userController.update_email);
 
 
 module.exports = router;
