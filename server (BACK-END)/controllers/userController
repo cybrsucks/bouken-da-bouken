@@ -1,5 +1,7 @@
 const User = require("../model/userModel");
 const session = require('express-session')
+const sendToken = require("../auth")
+const jwt = require('jsonwebtoken')
 
 exports.user_creation = (req, res) => {
     if (!req.body) {
@@ -65,9 +67,10 @@ exports.login = (req, res) => {
             res.status(400).send("Invalid Credentials");
         } else {   
             // console.log("door")
-            // console.log(data)
+            console.log(data)
+            
+            sendToken(data, 200, res)
 
-            res.status(200).json(data); // sends data  + JWT to front-end
             // res.status(200).send(data); // sends data to front-end
 
             // res.redirect("/dashboard");
@@ -76,6 +79,7 @@ exports.login = (req, res) => {
 };
 
 exports.dashboard = (req, res) => {
+    
 };
 
 exports.update_email = (req, res) => {

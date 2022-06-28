@@ -19,4 +19,28 @@ const verifyToken = (req, res, next) => {
     return next();
 };
 
+const sendToken = (user, statusCode, res) => {
+
+    user.getJwtToken = function() {
+        return jwt.sign({ username: user.username }, "hello", {expiresIn: "2h"})
+    }
+    
+    //create jwt token 
+    const token = user.getJwtToken();
+
+    // cookie options
+    const options = {
+        expires: new Date(Date.now() + 24*60*60*1000),
+        httpOnly: true
+    };
+
+    res.status(statusCode)
+        .cookie('token', token, options)
+        .json({
+            success: true,
+            token
+        })
+}
+
 module.exports = verifyToken;
+module.exports = sendToken;

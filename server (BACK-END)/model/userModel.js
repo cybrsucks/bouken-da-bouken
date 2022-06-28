@@ -39,21 +39,6 @@ User.create = async (newUser, result) => {
                 return;
             }
 
-            // Create token
-            const token = jwt.sign({
-                    username: username,
-                    password,
-                },
-                "hello", {
-                    expiresIn: "2h",
-                }
-            );
-
-            // save user token
-            User.token = token;
-
-            console.log("Create User.token" + token);
-
             // return new user
             console.log(`INFO: user created successfully with: `, {
                 id: res.insertId,
@@ -65,6 +50,9 @@ User.create = async (newUser, result) => {
         }
     );
 };
+
+
+
 
 //  called by exports.user_All in userController
 User.selectAll = (result) => {
@@ -82,6 +70,8 @@ User.selectAll = (result) => {
     });
 };
 
+
+
 //  called by exports.login in userController
 User.authentication = (uname, pwd, result) => {
     // if (!(uname && pwd)) {
@@ -98,19 +88,19 @@ User.authentication = (uname, pwd, result) => {
             if (res.length && hashedPwd === User.encryptedPassword){
             console.log("INFO: Login details are correct");
 
-            const token = jwt.sign({
-                    username: username,
-                    password,
-                },
-                "hello", {
-                    expiresIn: "2h",
-                }
-            );
+            console.log(uname)
+            // creates JWT token
+            
+            const token = jwt.sign({ username: User.username }, "hello", {expiresIn: "2h"})
+            console.log("token: ", token)
 
             // save user token
             User.token = token;
 
             console.log("Login User.token: " + User.token);
+            console.log();
+            console.log();
+            console.log();
             // console.log("User object: " + User);
             // console.log(res);  // res refers to the User object [Object object] containing * info for the user found in db
 

@@ -5,6 +5,7 @@ const cors = require("cors");
 const router = require("./routes/userRouting");
 const app = express();
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const auth = require("./auth");
 
@@ -12,6 +13,8 @@ const auth = require("./auth");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
+app.use(cookieParser())
 
 app.use("/", router);
 
