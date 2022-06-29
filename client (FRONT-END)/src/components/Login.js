@@ -31,8 +31,8 @@ function Login() {
                 if (localStorage.JWT_token === undefined) {
                     // alert(response.data.token)
                     console.log(response.data);
-                    localStorage.setItem('JWT_token', response.data.token);
-                    localStorage.setItem('username', response.data.username);
+                    localStorage.setItem('JWT_token', "reesponse.data.token");
+                    localStorage.setItem('username', "reesponse.data.username");
                     navigate("/dashboard");
                 }
             })

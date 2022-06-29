@@ -1,6 +1,6 @@
 const User = require("../model/userModel");
 const session = require('express-session')
-const sendToken = require("../auth")
+// const sendToken = require("../auth")
 const jwt = require('jsonwebtoken')
 
 exports.user_creation = (req, res) => {
@@ -76,13 +76,14 @@ exports.login = (req, res) => {
 
 exports.dashboard = (req, res) => {
     // const jwt_cookie = req.cookies.JWT;
-    console.log("Cookies: ", req.cookies);
+    console.log("req.Cookies: ", req.cookies);
     // res.end()
     const token = req.cookies.JWT;
+    // console.log(req)
     if (token) {
         jwt.verify(token, 'hello', async (err, decodedToken) => {
             const currentUser = decodedToken.username;
-            console.log("Current User: ", currentUser);
+            console.log("Current User: ", decodedToken);
             res.send(currentUser);
         });
     } else {

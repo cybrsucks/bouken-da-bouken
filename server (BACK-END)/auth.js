@@ -19,6 +19,7 @@ const config = process.env;
 //     return next();
 // };
 
+// remove this file, not in use
 // generates token upon login
 exports.sendToken = (user, statusCode, res) => {
 
