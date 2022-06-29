@@ -76,14 +76,15 @@ exports.login = (req, res) => {
 
 exports.dashboard = (req, res) => {
     // const jwt_cookie = req.cookies.JWT;
-    console.log("req.Cookies: ", req.cookies);
+    console.log("\n")
+    console.log("INFO: req.cookies: ", req.cookies);
     // res.end()
     const token = req.cookies.JWT;
-    // console.log(req)
+    console.log(token)
     if (token) {
         jwt.verify(token, 'hello', async (err, decodedToken) => {
             const currentUser = decodedToken.username;
-            console.log("Current User: ", decodedToken);
+            console.log("INFO: Current user's decodedToken: ", decodedToken);
             res.send(currentUser);
         });
     } else {
@@ -91,6 +92,20 @@ exports.dashboard = (req, res) => {
     }
     return;
 };
+
+exports.logout = (req, res, next) => {
+    res.cookie('JWT', 'none', {
+        expires: new Date(Date.now()),
+        httpOnly: true
+    })
+    res.status(200).json({
+        success: true,
+        message: 'Logged out successfully'
+    })
+    res.redirect('/')
+}
+
+
 
 exports.update_email = (req, res) => {
     const id = req.body.id;

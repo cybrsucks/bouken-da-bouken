@@ -8,8 +8,9 @@ router.post("/user/create", userController.user_creation); //working
 router.get("/getUsers", userController.user_All); //working
 router.post("/", userController.login); // working
 router.post("/login", userController.login); // working
-router.get("/dashboard", userController.dashboard);
-router.get("/user/manage")
+router.get("/dashboard", userController.dashboard); // working
+router.get("/logout", userController.logout);
+router.get("/user/manage");
 // router.get("/userDetails", userController.user_details);
 
 router.post("/UpdateEmail", userController.update_email);

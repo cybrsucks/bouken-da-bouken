@@ -83,7 +83,7 @@ User.authentication = (uname, pwd, result) => {
             if (res.length && hashedPwd === User.encryptedPassword){
             console.log("INFO: Login details are correct");
 
-            console.log(uname)
+            console.log("INFO: Username of current logged in user: ", uname)
 
             // creates JWT token
             const token = jwt.sign({ username: User.username }, "hello", {expiresIn: "2h"})
@@ -91,7 +91,7 @@ User.authentication = (uname, pwd, result) => {
             // save user token
             User.token = token;
 
-            console.log("Login User.token: " + User.token);
+            console.log("INFO: JWT token of " + uname + ": " + User.token);
 
             // console.log("User object: " + User); // refers to the User object [Object object] containing * info for the user found in db
             // console.log(res);  
