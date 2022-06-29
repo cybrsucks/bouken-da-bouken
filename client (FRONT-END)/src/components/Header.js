@@ -1,10 +1,24 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { FaHome, TbLogout  } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
+import Axios from "axios";
 
 function Header() {
     const active = Cookies.get('JWT');
+
+    let navigate = useNavigate();
+
+    const Logout = () => {
+        Axios.get("http://localhost:3001/logout", { withCredentials: true })
+            .then((response) => {
+                console.log(response.data);
+            }
+        )
+        localStorage.clear();
+        navigate("/login");
+    }
 
     if (active) {
         return (
@@ -16,9 +30,10 @@ function Header() {
                     </Link>
                     </div>
                     <div className="my-0 mr-md-auto font-weight-normal hover-link">
-                    <Link to="/logout" className="text-white">
-                        <p> Logout </p>
-                    </Link>
+                    {/* <Link to="/logout" className="text-white"> */}
+                    <button onClick = {Logout}> Logout </button>
+                        {/* <p> Logout </p> */}
+                    {/* </Link> */}
                     </div>
                 </div>
             </header>

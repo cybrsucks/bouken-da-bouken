@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 function Login() {
     const [username, setName] = useState("");
@@ -10,9 +11,19 @@ function Login() {
 
     let navigate = useNavigate();
 
-    const Login = () => {
-        if (localStorage.JWT_token){
+    const active = Cookies.get('JWT');
+
+    if (active) {
+        useEffect(() => {
             navigate("/dashboard");
+        })
+    }
+
+    const Login = () => {
+        if (active) {
+            useEffect(() => {
+                navigate("/dashboard");
+            })
         }
 
         if (username === "" || password === "") {
@@ -33,8 +44,8 @@ function Login() {
                     console.log(response.data);
                     localStorage.setItem('JWT_token', "reesponse.data.token");
                     localStorage.setItem('username', "reesponse.data.username");
-                    navigate("/dashboard");
                 }
+                navigate("/dashboard");
             })
             .catch((err) => {
                 console.log(err);

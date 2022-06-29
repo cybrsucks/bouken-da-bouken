@@ -93,8 +93,9 @@ exports.dashboard = (req, res) => {
     return;
 };
 
-exports.logout = (req, res, next) => {
-    res.cookie('JWT', 'none', {
+exports.logout = (req, res) => {
+    // console.log("here")
+    res.cookie("JWT", 'none', {
         expires: new Date(Date.now()),
         httpOnly: true
     })
