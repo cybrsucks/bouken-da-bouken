@@ -15,27 +15,22 @@ exports.user_creation = (req, res) => {
         email: req.body.email,
         password: req.body.password
     });
-
     User.create(user, (err, data) => {
         if (err){
             res.status(500).send({
             message:
                 err.message || "Some error occurred while creating the User."
             });
-
         } else {
             // console.log("dory")
             // res.send("data"); 
             res.status(200).send(data); // sends data to front-end
-    
-
         }
         
     })
 };
 
 exports.user_All = (req, res) => {
-
     User.selectAll((err, data) => {
         if (err) {
             if (err.kind === "not_found") {
@@ -60,7 +55,6 @@ exports.login = (req, res) => {
     // console.log(req.body);
     username = req.body.username;
     password = req.body.password;
-
     User.authentication(username, password, (err, data) => {
         if (err) {
             console.log(err);
@@ -106,20 +100,30 @@ exports.logout = (req, res) => {
     res.redirect('/')
 }
 
+// working on this function  here
+exports.user_details = (req, res) => {
+    console.log("\n")
+    // console.log("xzxxzxzxxzxz")
+    console.log("INFO: req.cookies.token: ", req.cookies.token);
+    const token = req.cookies.JWT;
+    if (token) {
+        jwt.verify(token, 'hello', async (err, decodedToken) => {
+            const currentUsername = decodedToken.username;
+            console.log("INFO: Current user's decodedToken: ", decodedToken);
+            // console.log(currentUsername);
+        
+            User.selectOne(currentUsername, (err, data) => {
+                res.send(data);// sends data to front-end    
+            });
+        }) 
+    } else {
+        console.log('JWT cookie not found')
+    }
+};
 
-
+// working on this function  here
 exports.update_email = (req, res) => {
-    const id = req.body.id;
-    const email = req.body.email;
-    console.log(req.body)
-    db.query("UPDATE user SET email = ? WHERE id = ?", [email, id], (err, result) => {
-        if (err) {
-            console.log(err)
-        }
-        else{
-            res.send(result)
-        }
-    })
+    console.log("hfaowlfhawoifhwalfawlkifawlfia")
 };
 
 exports.change_pwd = (req, res) => {};

@@ -38,7 +38,6 @@ User.create = async (newUser, result) => {
                 result(err, null);
                 return;
             }
-
             // return new user
             console.log(`INFO: user created successfully with: `, {
                 id: res.insertId,
@@ -50,7 +49,6 @@ User.create = async (newUser, result) => {
         }
     );
 };
-
 
 
 
@@ -75,27 +73,19 @@ User.selectAll = (result) => {
 //  called by exports.login in userController
 User.authentication = (uname, pwd, result) => {
     hashedPwd = crypto.createHmac('sha256', secret).update(pwd).digest('hex');
-
     sql.query(`SELECT * FROM user where username = "${uname}"`, (err, res) => {
         const User = res[0];
-
         // if (res.length && bcrypt.compare(pwd, User.encryptedPassword)) {
             if (res.length && hashedPwd === User.encryptedPassword){
             console.log("INFO: Login details are correct");
-
             console.log("INFO: Username of current logged in user: ", uname)
-
             // creates JWT token
             const token = jwt.sign({ username: User.username }, "hello", {expiresIn: "2h"})
-
             // save user token
             User.token = token;
-
             console.log("INFO: JWT token of " + uname + ": " + User.token);
-
             // console.log("User object: " + User); // refers to the User object [Object object] containing * info for the user found in db
             // console.log(res);  
-
             result(null, res[0]); //returns null err and result object
             return;
         } else {
@@ -106,5 +96,42 @@ User.authentication = (uname, pwd, result) => {
         }
     });
 };
+
+
+
+User.updateEmail = (newEmail, result) => {
+    console.log(newEmail);
+    // const id = req.body.id;
+    // const email = req.body.email;
+    // console.log(req.body)
+    // db.query("UPDATE user SET email = ? WHERE id = ?", [email, id], (err, result) => {
+    //     if (err) {
+    //         console.log(err)
+    //     }
+    //     else{
+    //         res.send(result)
+    //     }
+    // })
+}
+
+
+
+User.selectOne = (username, result) => {
+    sql.query(`SELECT * FROM user where username = ?`, [username], (err, res) => {
+        // console.log(">>>>>>>>>>>")
+        // console.log(res[0])
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            console.log(`INFO: listing user details`);
+            result(null, res[0]); //returns null err and result object
+            return;
+        }
+    });
+};
+
 
 module.exports = User;

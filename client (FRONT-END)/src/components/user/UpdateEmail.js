@@ -1,6 +1,17 @@
 import React, { useState } from "react"
 import Axios from "axios"
 
+// const [userDetails, showUserDetails] = useState([]);
+
+function fetchUserDetails() {
+    Axios.get("http://localhost:3001/userDetails", { withCredentials: true })
+        .then((response) => {
+            // showUserDetails(response.data);
+            console.log("fdyjugujhgui")
+            console.log(response.data)
+    })
+}
+
 function UpdateEmail() {
     // const [userList, setUserList] = useState([]);
 
@@ -10,30 +21,25 @@ function UpdateEmail() {
     //     })
     // }
 
-    const [userDetails, showUserDetails] = useState([]);
-    const currentUser = localStorage.getItem("currentUser");
-    const UserDetails = () => {
-        Axios.get("http://localhost:3001/userDetails").then((response) => {
-            showUserDetails(response.data);
-        })
-    }
-
     const [newEmail, setNewEmail] = useState('');
 
-    const UpdateEmail = (id) => {
-        Axios.post("http://localhost:3001/UpdateEmail", { email: newEmail, id: id }).then(
-            (response) => {
-                alert('what') 
-            }
-        ).catch ((err) => {
-            console.log(err)
-        })
-    } 
+    // const UpdateEmail = () => {
+    //     Axios.post("http://localhost:3001/UpdateEmail", { 
+    //         email: newEmail,
+    //         id: id 
+    //     },{ withCredentials: true })
+    //         .then((response) => {
+    //             alert('what') 
+    //         }
+    //     ).catch ((err) => {
+    //         console.log(err)
+    //     })
+    // } 
 
     return (
         <div className="information">
-        <button onClick={UserDetails}>Display User Details</button> 
-            {userDetails.map((val, key) => {
+        <button onClick={fetchUserDetails}>Display User Details</button> 
+            {/* {userDetails.map((val, key) => {
             return (
                 <div className="user" key={key}>
                     <div>
@@ -49,7 +55,7 @@ function UpdateEmail() {
                     </div>
                 </div>
                 );
-            })}
+            })} */}
         </div> 
         )
     }

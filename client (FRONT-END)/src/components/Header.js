@@ -16,6 +16,7 @@ function Header() {
                 console.log(response.data);
             }
         )
+        
         localStorage.clear();
         navigate("/login");
     }
