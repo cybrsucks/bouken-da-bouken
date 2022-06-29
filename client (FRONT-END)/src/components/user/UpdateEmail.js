@@ -1,18 +1,28 @@
 import React, { useState } from "react"
 import Axios from "axios"
 
-// const [userDetails, showUserDetails] = useState([]);
-
-function fetchUserDetails() {
-    Axios.get("http://localhost:3001/userDetails", { withCredentials: true })
-        .then((response) => {
-            // showUserDetails(response.data);
-            console.log("fdyjugujhgui")
-            console.log(response.data)
-    })
-}
+// function fetchUserDetails() {
+//     Axios.get("http://localhost:3001/userDetails", { withCredentials: true })
+//         .then((response) => {
+//             console.log(response.data);
+//             console.log("fdyjugujhgui");
+//             document.getElementById("userDeets-username").innerHTML = response.data.username;
+//             document.getElementById("userDeets-email").innerHTML = response.data.email;
+//     })
+// }
 
 function UpdateEmail() {
+    Axios.get("http://localhost:3001/userDetails", { withCredentials: true })
+        .then((response) => {
+            console.log(response.data);
+            console.log("fdyjugujhgui");
+            document.getElementById("userDeets-username").innerHTML = response.data.username;
+            document.getElementById("userDeets-email").innerHTML = response.data.email;
+    })
+
+    // const [userDetails, showUserDetails] = useState([]);
+
+
     // const [userList, setUserList] = useState([]);
 
     // const ListUsers = () => {
@@ -38,24 +48,10 @@ function UpdateEmail() {
 
     return (
         <div className="information">
-        <button onClick={fetchUserDetails}>Display User Details</button> 
-            {/* {userDetails.map((val, key) => {
-            return (
-                <div className="user" key={key}>
-                    <div>
-                        <p>{val.id}</p>
-                        <p>{val.username}</p>
-                        <p>{val.age}</p>
-                        <p>{val.email}</p>
-                        <p>{val.password}</p>
-                    </div>
-                    <div> 
-                        <input type="text" placeholder="Email" onChange={(event) => { setNewEmail(event.target.value); }}/>
-                        <button onClick={() => {UpdateEmail(val.id)}}> Update </button>
-                    </div>
-                </div>
-                );
-            })} */}
+        {/* <button onClick={fetchUserDetails}>Display User Details</button>  */}
+        <h5> <span> user details </span> </h5>
+        <h6> Username : <span id="userDeets-username">  </span> </h6>
+        <h6> Email : <span id="userDeets-email">  </span> </h6>
         </div> 
         )
     }

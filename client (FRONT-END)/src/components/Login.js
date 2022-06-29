@@ -11,20 +11,7 @@ function Login() {
 
     let navigate = useNavigate();
 
-    const active = Cookies.get('JWT');
-
-    if (active) {
-        useEffect(() => {
-            navigate("/dashboard");
-        })
-    }
-
     const Login = () => {
-        if (active) {
-            useEffect(() => {
-                navigate("/dashboard");
-            })
-        }
 
         if (username === "" || password === "") {
             setError("Fields are required");
@@ -36,7 +23,6 @@ function Login() {
                 password: password,
             },{ withCredentials: true })
             .then((response) => {
-                console.log(response.data);
 
                 // remove this to disallow JWT_token in localStorage
                 if (localStorage.JWT_token === undefined) {

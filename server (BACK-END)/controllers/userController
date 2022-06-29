@@ -104,7 +104,7 @@ exports.logout = (req, res) => {
 exports.user_details = (req, res) => {
     console.log("\n")
     // console.log("xzxxzxzxxzxz")
-    console.log("INFO: req.cookies.token: ", req.cookies.token);
+    console.log("INFO: req.cookies: ", req.cookies);
     const token = req.cookies.JWT;
     if (token) {
         jwt.verify(token, 'hello', async (err, decodedToken) => {
