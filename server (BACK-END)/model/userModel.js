@@ -99,24 +99,6 @@ User.authentication = (uname, pwd, result) => {
 
 
 
-User.updateEmail = (username, newEmail, result) => {
-    console.log(newEmail);
-    sql.query("UPDATE user SET email = ? WHERE username = ?", [newEmail, username], (err, res) => {
-        const User = res;
-        if (err) {
-            console.log(err)
-        }
-        else{
-            // res.send(result)
-            console.log(">>>>>>>>>>>>>>>>>>>" + User)
-            result(null, res[0]); //returns null err and result object
-            return;
-        }
-    })
-}
-
-
-
 User.selectOne = (username, result) => {
     sql.query(`SELECT * FROM user where username = ?`, [username], (err, res) => {
         // console.log(">>>>>>>>>>>")
@@ -133,6 +115,38 @@ User.selectOne = (username, result) => {
         }
     });
 };
+
+
+
+User.updateEmail = (username, newEmail, result) => {
+    console.log(newEmail);
+    sql.query("UPDATE user SET email = ? WHERE username = ?", [newEmail, username], (err, res) => {
+        if (err) {
+            console.log(err)
+        }
+        else{
+            result(null, res[0]); //returns null err and result object
+            return;
+        }
+    })
+}
+
+
+
+User.changePwd = (username, newPwd, result) => {
+    console.log(newPwd);
+    encryptedPassword = crypto.createHmac('sha256', secret).update(newPwd).digest('hex');
+    sql.query("UPDATE user SET encryptedPassword = ? WHERE username = ?", [encryptedPassword, username], (err, res) => {
+        if (err) {
+            console.log(err)
+        }
+        else{
+            result(null, res[0]); //returns null err and result object
+            return;
+        }
+    })
+}
+
 
 
 module.exports = User;

@@ -14,6 +14,6 @@ router.get("/user/manage");
 router.get("/userDetails", userController.user_details); // working
 
 router.post("/updateEmail", userController.update_email);
-
+router.post("/changePassword", userController.change_password);
 
 module.exports = router;
