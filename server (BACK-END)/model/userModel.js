@@ -38,22 +38,6 @@ User.create = async (newUser, result) => {
                 result(err, null);
                 return;
             }
-
-            // Create token
-            const token = jwt.sign({
-                    username: username,
-                    password,
-                },
-                "hello", {
-                    expiresIn: "2h",
-                }
-            );
-
-            // save user token
-            User.token = token;
-
-            console.log("Create User.token" + token);
-
             // return new user
             console.log(`INFO: user created successfully with: `, {
                 id: res.insertId,
@@ -65,6 +49,8 @@ User.create = async (newUser, result) => {
         }
     );
 };
+
+
 
 //  called by exports.user_All in userController
 User.selectAll = (result) => {
@@ -82,38 +68,24 @@ User.selectAll = (result) => {
     });
 };
 
+
+
 //  called by exports.login in userController
 User.authentication = (uname, pwd, result) => {
-    // if (!(uname && pwd)) {
-    //     res.status(400).send("All input is required");
-    // }
     hashedPwd = crypto.createHmac('sha256', secret).update(pwd).digest('hex');
-
     sql.query(`SELECT * FROM user where username = "${uname}"`, (err, res) => {
-        // console.log(hashedPwd);
         const User = res[0];
-        // console.log(User.encryptedPassword);
-
         // if (res.length && bcrypt.compare(pwd, User.encryptedPassword)) {
             if (res.length && hashedPwd === User.encryptedPassword){
             console.log("INFO: Login details are correct");
-
-            const token = jwt.sign({
-                    username: username,
-                    password,
-                },
-                "hello", {
-                    expiresIn: "2h",
-                }
-            );
-
+            console.log("INFO: Username of current logged in user: ", uname)
+            // creates JWT token
+            const token = jwt.sign({ username: User.username }, "hello", {expiresIn: "2h"})
             // save user token
             User.token = token;
-
-            console.log("Login User.token: " + User.token);
-            // console.log("User object: " + User);
-            // console.log(res);  // res refers to the User object [Object object] containing * info for the user found in db
-
+            console.log("INFO: JWT token of " + uname + ": " + User.token);
+            // console.log("User object: " + User); // refers to the User object [Object object] containing * info for the user found in db
+            // console.log(res);  
             result(null, res[0]); //returns null err and result object
             return;
         } else {
@@ -124,5 +96,57 @@ User.authentication = (uname, pwd, result) => {
         }
     });
 };
+
+
+
+User.selectOne = (username, result) => {
+    sql.query(`SELECT * FROM user where username = ?`, [username], (err, res) => {
+        // console.log(">>>>>>>>>>>")
+        // console.log(res[0])
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            console.log(`INFO: listing user details`);
+            result(null, res[0]); //returns null err and result object
+            return;
+        }
+    });
+};
+
+
+
+User.updateEmail = (username, newEmail, result) => {
+    console.log(newEmail);
+    sql.query("UPDATE user SET email = ? WHERE username = ?", [newEmail, username], (err, res) => {
+        if (err) {
+            console.log(err)
+        }
+        else{
+            result(null, res[0]); //returns null err and result object
+            return;
+        }
+    })
+}
+
+
+
+User.changePwd = (username, newPwd, result) => {
+    console.log(newPwd);
+    encryptedPassword = crypto.createHmac('sha256', secret).update(newPwd).digest('hex');
+    sql.query("UPDATE user SET encryptedPassword = ? WHERE username = ?", [encryptedPassword, username], (err, res) => {
+        if (err) {
+            console.log(err)
+        }
+        else{
+            result(null, res[0]); //returns null err and result object
+            return;
+        }
+    })
+}
+
+
 
 module.exports = User;

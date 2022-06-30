@@ -1,43 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 function Login() {
     const [username, setName] = useState("");
     const [password, setPassword] = useState("");
 
     const [err, setError] = useState("");
-    const [user, setUser] = useState();
 
     let navigate = useNavigate();
 
     const Login = () => {
-        const keyToken = localStorage.getItem("JWT_token");
-
-        if (keyToken) {
-            navigate("/dashboard");
-        }
-
 
         if (username === "" || password === "") {
             setError("Fields are required");
             return;
         }
+
         Axios.post("http://localhost:3001/login", {
                 username: username,
                 password: password,
-            })
+            },{ withCredentials: true })
             .then((response) => {
-                console.log(response.data);
-                setUser(response.data);
 
-                if (localStorage.loggedIn === undefined) {
+                // remove this to disallow JWT_token in localStorage
+                if (localStorage.JWT_token === undefined) {
                     // alert(response.data.token)
-                    localStorage.setItem('JWT_token', response.data.token);
-                    localStorage.setItem('user', response.data.username);
+                    console.log(response.data);
+                    localStorage.setItem('JWT_token', "reesponse.data.token");
+                    localStorage.setItem('username', "reesponse.data.username");
                 }
                 navigate("/dashboard");
-                // response.data;
             })
             .catch((err) => {
                 console.log(err);

@@ -28,14 +28,13 @@
     <title>React App</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
       
     </div>
     <div style="text-align:center; align-items:center; justify-content:center;">
       <p> Logged in: <span id="result">username</span> </p>
       <script>
-        document.getElementById("result").innerHTML = localStorage.getItem("user");
+        document.getElementById("result").innerHTML = localStorage.getItem("username");
       </script>
     </div>
   </body>
