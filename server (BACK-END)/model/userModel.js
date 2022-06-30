@@ -7,7 +7,6 @@ const secret = 'secret';
 // constructor
 const User = function (user) {
     this.username = user.username;
-    this.age = user.age;
     this.email = user.email;
     this.password = user.password;
     this.token = user.token;
@@ -17,7 +16,6 @@ const User = function (user) {
 User.create = async (newUser, result) => {
     const {
         username,
-        age,
         email,
         password
     } = newUser;
@@ -27,7 +25,6 @@ User.create = async (newUser, result) => {
         `INSERT INTO user SET ?`,
         [{
             username,
-            age,
             email,
             encryptedPassword,
         }, ],
@@ -80,8 +77,7 @@ User.authentication = (email, pwd, result) => {
             // creates JWT token
             const token = jwt.sign({ username: User.username }, "hello", {expiresIn: "2h"})
             // save user token
-            User.token = token;
-            console.log("INFO: JWT token of " + User.username + ": " + User.token);
+            console.log("INFO: JWT token of " + User.username + ": " + token);
             // console.log("User object: " + User); // refers to the User object [Object object] containing * info for the user found in db
             // console.log(res);  
             result(null, res[0]); //returns null err and result object
