@@ -99,19 +99,20 @@ User.authentication = (uname, pwd, result) => {
 
 
 
-User.updateEmail = (newEmail, result) => {
+User.updateEmail = (username, newEmail, result) => {
     console.log(newEmail);
-    // const id = req.body.id;
-    // const email = req.body.email;
-    // console.log(req.body)
-    // db.query("UPDATE user SET email = ? WHERE id = ?", [email, id], (err, result) => {
-    //     if (err) {
-    //         console.log(err)
-    //     }
-    //     else{
-    //         res.send(result)
-    //     }
-    // })
+    sql.query("UPDATE user SET email = ? WHERE username = ?", [newEmail, username], (err, res) => {
+        const User = res;
+        if (err) {
+            console.log(err)
+        }
+        else{
+            // res.send(result)
+            console.log(">>>>>>>>>>>>>>>>>>>" + User)
+            result(null, res[0]); //returns null err and result object
+            return;
+        }
+    })
 }
 
 

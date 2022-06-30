@@ -123,6 +123,27 @@ exports.user_details = (req, res) => {
 
 // working on this function  here
 exports.update_email = (req, res) => {
+    console.log("\n")
+    console.log(req.body.email)
+    const newEmail = req.body.email;
+    // console.log("INFO: req.cookies: ", req.cookies);
+    // res.end()
+    const token = req.cookies.JWT;
+    // console.log(token)
+    if (token) {
+        jwt.verify(token, 'hello', async (err, decodedToken) => {
+            const currentUsername = decodedToken.username;
+            console.log("INFO: Current user's decodedToken: ", decodedToken);
+            
+            User.updateEmail(currentUsername, newEmail, (err, data) => {
+                res.send(newEmail)
+                
+            })
+        });
+    } else {
+        console.log('JWT cookie not found')
+    }
+
     console.log("hfaowlfhawoifhwalfawlkifawlfia")
 };
 
