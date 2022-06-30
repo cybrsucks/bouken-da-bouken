@@ -21,7 +21,6 @@ User.create = async (newUser, result) => {
         email,
         password
     } = newUser;
-    // encryptedPassword = await bcrypt.hash(password, 10);
     encryptedPassword = crypto.createHmac('sha256', secret).update(password).digest('hex');
     // console.log(encryptedPassword); 
     sql.query(
@@ -71,19 +70,18 @@ User.selectAll = (result) => {
 
 
 //  called by exports.login in userController
-User.authentication = (uname, pwd, result) => {
+User.authentication = (email, pwd, result) => {
     hashedPwd = crypto.createHmac('sha256', secret).update(pwd).digest('hex');
-    sql.query(`SELECT * FROM user where username = "${uname}"`, (err, res) => {
+    sql.query(`SELECT * FROM user where email = "${email}"`, (err, res) => {
         const User = res[0];
-        // if (res.length && bcrypt.compare(pwd, User.encryptedPassword)) {
-            if (res.length && hashedPwd === User.encryptedPassword){
+        if ((res.length && hashedPwd === User.encryptedPassword) && (User.active == 1)){
             console.log("INFO: Login details are correct");
-            console.log("INFO: Username of current logged in user: ", uname)
+            console.log("INFO: Username of current logged in user: ", User.username)
             // creates JWT token
             const token = jwt.sign({ username: User.username }, "hello", {expiresIn: "2h"})
             // save user token
             User.token = token;
-            console.log("INFO: JWT token of " + uname + ": " + User.token);
+            console.log("INFO: JWT token of " + User.username + ": " + User.token);
             // console.log("User object: " + User); // refers to the User object [Object object] containing * info for the user found in db
             // console.log(res);  
             result(null, res[0]); //returns null err and result object

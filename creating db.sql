@@ -1,23 +1,48 @@
-CREATE TABLE `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) DEFAULT NULL,
-  `age` int DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `encryptedPassword` varchar(100) DEFAULT NULL,
-  `token` varchar(100) DEFAULT NULL,
+
+CREATE TABLE `studydb`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(100) NULL,
+  `encryptedPassword` VARCHAR(255) NOT NULL,
+  `token` VARCHAR(255) DEFAULT NULL,
   `active` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE);
+  
+  CREATE TABLE `studydb`.`group` (
+  `groupID` int NOT NULL AUTO_INCREMENT,
+  `groupName` varchar(45) NOT NULL,
+  PRIMARY KEY (`groupID`),
+  UNIQUE KEY `id_UNIQUE` (`groupID` ASC) VISIBLE);
 
 
-INSERT INTO `user` (`id`, `username`, `age`, `encryptedPassword`, `email`, `active`) VALUES (1, 'admin', 20, 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'admin@min.com', 1);
-INSERT INTO `user` (`id`, `username`, `age`, `encryptedPassword`, `email`, `active`) VALUES (2, 'test', 22, '0329a06b62cd16b33eb6792be8c60b158d89a2ee3a876fce9a881ebb488c0914', 'test@test.com', 1);
-INSERT INTO `user` (`id`, `username`, `age`, `encryptedPassword`, `email`, `active`) VALUES (3, 'best', 23, 'd901c7b6ebb76b0fda2538a7371d7927d9fc186ef2bbf4f97d07a6d74583e027', 'best@test.com', 1);
-INSERT INTO `user` (`id`, `username`, `age`, `encryptedPassword`, `email`, `active`) VALUES (4, 'west', 24, 'be8de223c95e90146525d13c6edeb62c31dcb93b3b32ad0d977495ff2a53c668', 'west@test.com', 0);
+INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `token`, `active`) 
+VALUES (1, 'admin', 'admin@min.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', '', 1);
+INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `token`, `active`) 
+VALUES (2, 'user1', 'user1@grAup.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', '', 1);
+INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `token`, `active`) 
+VALUES (3, 'user2', 'user2@grAup.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', '', 1);
+INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `token`, `active`) 
+VALUES (4, 'user3', 'user3@grBup.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', '', 1);
+INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `token`, `active`) 
+VALUES (5, 'user4', 'user4@grBup.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', '', 0);
 
 delete from user where id > 0;
-select * from user;
+select * from studydb.group;
+select * from studydb.user;
+select * from studydb.usergroup;
+
+-- create new usergroup 
+INSERT INTO `usergroup` (`groupID`, `groupName`, `username`, `role`) 
+VALUES (1, 'administrator', 'admin', 'admin');
+
+-- create new group 
+INSERT INTO `group` (`groupID`, `groupName`) 
+VALUES (1, 'administrator');
+
+
+  
 
 
 SELECT * FROM user where username = "admin" and password = "wz";

@@ -14,10 +14,11 @@ function Header() {
         Axios.get("http://localhost:3001/logout", { withCredentials: true })
             .then((response) => {
                 console.log(response.data);
+                localStorage.setItem('username', "");
             }
         )
         
-        localStorage.clear();
+        // localStorage.clear();
         navigate("/login");
     }
 
@@ -32,7 +33,9 @@ function Header() {
                     </div>
                     <div className="my-0 mr-md-auto font-weight-normal hover-link">
                     {/* <Link to="/logout" className="text-white"> */}
-                    <button onClick = {Logout}> Logout </button>
+                    <Link to="/">
+                        <button onClick = {() => {Logout(), window.location.reload}}> Logout </button>
+                    </Link>
                         {/* <p> Logout </p> */}
                     {/* </Link> */}
                     </div>

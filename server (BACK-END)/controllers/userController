@@ -11,7 +11,6 @@ exports.user_creation = (req, res) => {
     }
     const user = new User({
         username: req.body.username,
-        age: req.body.age,
         email: req.body.email,
         password: req.body.password
     });
@@ -26,7 +25,6 @@ exports.user_creation = (req, res) => {
             // res.send("data"); 
             res.status(200).send(data); // sends data to front-end
         }
-        
     })
 };
 
@@ -52,18 +50,19 @@ exports.login = (req, res) => {
             message: "Content can not be empty!"
         });
     }
-    // console.log(req.body);
-    username = req.body.username;
-    password = req.body.password;
-    User.authentication(username, password, (err, data) => {
+    console.log(req.body.email, req.body.password);
+    const email = req.body.email;
+    const password = req.body.password;
+    User.authentication(email, password, (err, data) => {
         if (err) {
             console.log(err);
             res.status(400).send("Invalid Credentials");
         } else {
             res.cookie("JWT", data.token)
+            res.send(data);
             // res.status(200).send(data).cookie("JWT", data.token); // sends data to front-end
             // res.status(200).send(data); // sends data to front-end
-            res.status(200).redirect("/dashboard");
+            // res.status(200).redirect("/dashboard");
         }
     })
 };
@@ -97,7 +96,7 @@ exports.logout = (req, res) => {
         success: true,
         message: 'Logged out successfully'
     })
-    res.redirect('/')
+    // res.redirect('/')
 }
 
 // working on this function  here

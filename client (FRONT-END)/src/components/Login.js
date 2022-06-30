@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 
 function Login() {
-    const [username, setName] = useState("");
+    // const [username, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const [err, setError] = useState("");
@@ -13,49 +14,46 @@ function Login() {
 
     const Login = () => {
 
-        if (username === "" || password === "") {
+        // if (username === "" || password === "") {
+        if (email === "" || password === "") {
             setError("Fields are required");
             return;
         }
 
         Axios.post("http://localhost:3001/login", {
-                username: username,
+                // username: username,
+                email, email,
                 password: password,
             },{ withCredentials: true })
             .then((response) => {
-
                 // remove this to disallow JWT_token in localStorage
-                if (localStorage.JWT_token === undefined) {
+                if (localStorage.username === "") {
                     // alert(response.data.token)
                     console.log(response.data);
-                    localStorage.setItem('JWT_token', "reesponse.data.token");
-                    localStorage.setItem('username', "reesponse.data.username");
+                    localStorage.setItem('username', response.data.username);
                 }
                 navigate("/dashboard");
             })
             .catch((err) => {
                 console.log(err);
-                setError("Incorrect username/password");
+                setError("Incorrect email/password");
             });
     };
 
     return ( 
         <div className = "information" >
-        <label> Username: </label> 
+        {/* <label> Username: </label> 
         <input type = "text" onChange = {
             (event) => {
                 setName(event.target.value);
             }
-        }/> 
-        <label> Password: </label> 
-        <input type = "text" onChange = {
-            (event) => {
-                setPassword(event.target.value);
-            }
-        }/> 
-        <button onClick = {Login}> Login </button>
-
-        {err} 
+        }/>  */}
+            <label> Email: </label> 
+            <input type = "email" onChange = {(event) => {setEmail(event.target.value);}}/> 
+            <label> Password: </label> 
+            <input type = "password" onChange = {(event) => {setPassword(event.target.value);}}/> 
+            <button onClick = {() => {Login(), window.location.reload}}> Login </button>
+            <span style={{'color': 'red'}}>{err}</span>
         </div>
     );
 }
