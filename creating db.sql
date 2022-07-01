@@ -16,6 +16,17 @@ CREATE TABLE `studydb`.`user` (
   PRIMARY KEY (`groupID`),
   UNIQUE KEY `id_UNIQUE` (`groupID` ASC) VISIBLE);
 
+CREATE TABLE `usergroup` (
+  `groupID` int NOT NULL,
+  `groupName` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `role` varchar(45) NOT NULL,
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `groupID_UNIQUE` (`groupID`),
+  CONSTRAINT `groupID` FOREIGN KEY (`groupID`) REFERENCES `group` (`groupID`),
+  CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `token`, `active`) 
 VALUES (1, 'admin', 'admin@min.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', '', 1);

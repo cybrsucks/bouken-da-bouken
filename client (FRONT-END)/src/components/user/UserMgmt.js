@@ -24,6 +24,15 @@ function UserMgmt() {
                         </Link>
                     </div> 
                 </div>
+                <div className="col">
+                    <div>
+                        <Link to="/user/displayStatus" className="dashboard-link">
+                            <div>
+                            Update User Status
+                            </div>
+                        </Link>
+                    </div> 
+                </div>
             </div>
         </div>
         </div> 

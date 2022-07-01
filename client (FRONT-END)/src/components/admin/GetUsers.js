@@ -17,11 +17,11 @@ function GetUsers() {
         {userList.map((val, key) => {
         return (
             <div className="user">
-                <p>{val.id}</p>
-                <p>{val.username}</p>
-                <p>{val.age}</p>
-                <p>{val.email}</p>
-                <p>{val.password}</p>
+                <p>ID: {val.id}</p>
+                <p>Username: {val.username}</p>
+                <p>Email: {val.email}</p>
+                <p>Password: {val.password}</p>
+                <p>Status: {val.active}</p>
             </div>
             );
         })}

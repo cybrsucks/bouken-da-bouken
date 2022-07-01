@@ -9,11 +9,12 @@ router.get("/getUsers", userController.user_All); //working
 router.post("/", userController.login); // working
 router.post("/login", userController.login); // working
 router.get("/dashboard", userController.dashboard); // working
-router.get("/logout", userController.logout);
-router.get("/user/manage");
+router.get("/logout", userController.logout); // working
+router.get("/user/manage"); // working
 router.get("/userDetails", userController.user_details); // working
+router.post("/user/updateEmail", userController.update_email); // working
+router.post("/changePassword", userController.change_password); // working
 
-router.post("/updateEmail", userController.update_email);
-router.post("/changePassword", userController.change_password);
-
+router.get("/user/displayStatus", userController.user_statusList); // working
+router.post("/user/updateStatus", userController.user_status); // working
 module.exports = router;

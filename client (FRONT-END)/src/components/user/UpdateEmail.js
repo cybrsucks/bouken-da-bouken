@@ -14,7 +14,7 @@ function UpdateEmail() {
     const [newEmail, setNewEmail] = useState('');
 
     const UpdateEmail = () => {
-        Axios.post("http://localhost:3001/updateEmail", { 
+        Axios.post("http://localhost:3001/user/updateEmail", { 
             email: newEmail
         },{ withCredentials: true })
             .then((response) => {
