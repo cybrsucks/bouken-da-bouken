@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 
 function Login() {
+    const activeCookies = Cookies.get('JWT');
+    if (activeCookies) {
+        Cookies.remove('JWT');
+    }
+    
     // const [username, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -27,10 +32,10 @@ function Login() {
             },{ withCredentials: true })
             .then((response) => {
                 // remove this to disallow JWT_token in localStorage
-                if (localStorage.username === "") {
+                if (sessionStorage.username === "") {
                     // alert(response.data.token)
                     console.log(response.data);
-                    localStorage.setItem('username', response.data.username);
+                    sessionStorage.setItem('username', response.data.username);
                 }
                 navigate("/dashboard");
             })

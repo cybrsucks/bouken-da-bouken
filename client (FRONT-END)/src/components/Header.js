@@ -6,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 
 function Header() {
-    const active = Cookies.get('JWT');
+    if (sessionStorage.getItem('username') == undefined) {
+        sessionStorage.setItem('username', "")
+    }
+    
+    const active = sessionStorage.getItem('username');
 
     let navigate = useNavigate();
 
@@ -14,7 +18,7 @@ function Header() {
         Axios.get("http://localhost:3001/logout", { withCredentials: true })
             .then((response) => {
                 console.log(response.data);
-                localStorage.setItem('username', "");
+                sessionStorage.setItem('username', "");
             }
         )
         

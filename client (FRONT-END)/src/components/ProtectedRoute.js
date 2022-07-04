@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 
-const keyToken = localStorage.getItem("username");
+const keyToken = sessionStorage.getItem("username");
 
 const ProtectedRoute = ({ children , user }) => {
     if (keyToken == ''){
