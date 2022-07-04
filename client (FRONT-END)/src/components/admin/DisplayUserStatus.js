@@ -16,7 +16,7 @@ function DisplayUserStatus() {
 
     function updateStatus(username, status){
         if (status == 1){
-            console.log("aaaaaaaaaaaaaaaaaaa")
+            // console.log("aaaaaaaaaaaaaaaaaaa")
             Axios.post("http://localhost:3001/user/updateStatus", { username: username, active: status }, { withCredentials: true })
                 .then((response) => {
                     alert("status 1 updated successfully")

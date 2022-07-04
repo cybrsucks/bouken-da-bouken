@@ -9,7 +9,7 @@ function Header() {
     if (sessionStorage.getItem('username') == undefined) {
         sessionStorage.setItem('username', "")
     }
-    
+
     const active = sessionStorage.getItem('username');
 
     let navigate = useNavigate();
@@ -28,7 +28,7 @@ function Header() {
 
     if (active) {
         return (
-            <header className="header-bar bg-primary mb-3">
+            <header className="header-bar bg-primary">
                 <div className=" d-flex align-items-center p-3" style={{height: '60px', backgroundColor: '#1b3a52'}}>
                     <div className="my-0 mr-md-auto font-weight-normal hover-link">
                     <Link to="/dashboard" className="text-white">

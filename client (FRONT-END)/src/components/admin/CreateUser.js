@@ -19,15 +19,17 @@ function CreateUser() {
     
 
     return (
-        // to-do: all html to create html files under pages, call header and page html in here 
     <div className="information">
-    <label>Username:</label>
-        <input type="text" onChange={(event) => { setName(event.target.value) }} />
-    <label>Email:</label>
-        <input type="email" onChange={(event) => { setEmail(event.target.value) }} />
-    <label>Password:</label>
-        <input type="text" onChange={(event) => { setPassword(event.target.value) }} />
-    <button onClick={CreateUser}>Add User</button>
+        <h5> <span> Create new user </span> </h5>
+        <div className="information">
+        <label>Username:</label>
+            <input type="text" onChange={(event) => { setName(event.target.value) }} />
+        <label>Email:</label>
+            <input type="email" onChange={(event) => { setEmail(event.target.value) }} />
+        <label>Password:</label>
+            <input type="text" onChange={(event) => { setPassword(event.target.value) }} />
+        <button onClick={CreateUser}>Add User</button>
+        </div>
     </div>
 )
 
