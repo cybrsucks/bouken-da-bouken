@@ -30,15 +30,15 @@ CREATE TABLE `usergroup` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `role`, `active`) 
+INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
 VALUES (1, 'admin', 'admin@min.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'ADMIN', 1);
-INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `role`, `active`) 
+INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
 VALUES (2, 'user1', 'user1@grAup.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G1', 1);
-INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `role`, `active`) 
+INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
 VALUES (3, 'user2', 'user2@grAup.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G1,G2', 1);
-INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `role`, `active`) 
+INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
 VALUES (4, 'user3', 'user3@grBup.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G2', 1);
-INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `role`, `active`) 
+INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
 VALUES (5, 'user4', 'user4@grBup.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G2', 0);
 
 -- INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `role`, `active`) 
@@ -49,6 +49,8 @@ VALUES (5, 'user4', 'user4@grBup.com', 'e5584918cd080eecde3a88479769187467817183
 delete from user where id > 0;
 select * from studydb.group;
 select * from studydb.user;
+
+SELECT username, groupings, active FROM studydb.user;
 
 
 select * from studydb.usergroup;

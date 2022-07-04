@@ -14,6 +14,7 @@ import UserMgmt from "./components/user/UserMgmt";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DisplayUserStatus from "./components/admin/DisplayUserStatus";
 import DisplayGroups from "./components/admin/DisplayGroups";
+import GroupChecklist from "./components/admin/GroupChecklist";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/user/changePassword" element={<ChangePwd />} />
 
         <Route path="/groups/displayGroups" element={<DisplayGroups /> }/>
+        <Route path="/groups/groupChecklist" element={<GroupChecklist /> }/>
       </Routes>
     </div></>
   )

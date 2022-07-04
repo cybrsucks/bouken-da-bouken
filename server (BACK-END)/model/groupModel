@@ -18,6 +18,23 @@ Group.displayGroups = (result) => {
         }
         if (res.length) {
             result(null, res); //returns null err and result object
+            return; 
+        }
+    });
+};
+
+
+//  called by exports.user_All in userController
+Group.usergroupList = (result) => {
+    sql.query(`SELECT username, groupings, active FROM user`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            // console.log(`INFO: listing all users`);
+            result(null, res); //returns null err and result object
             return;
         }
     });

@@ -7,11 +7,6 @@ function DisplayUserStatus() {
     Axios.get("http://localhost:3001/user/displayStatus", { withCredentials: true })
         .then((response) => {
             setUserList(response.data);
-            // console.log(response.data);
-            // console.log("a21");
-            // document.getElementById("userDeets-username").innerHTML = response.data.username;
-            // document.getElementById("userDeets-email").innerHTML = response.data.email;
-            // document.getElementById("userDeets-status").innerHTML = response.data.status;
     })
 
     function updateStatus(username, status){
@@ -47,7 +42,7 @@ function DisplayUserStatus() {
                     <div className="user">
                         <p><span style={{fontWeight: "bold"}}>Username:</span> {val.username}</p>
                         <p><span style={{fontWeight: "bold"}}>Email:</span> {val.email}</p>
-                        <p><span style={{fontWeight: "bold"}}> Status:</span> {val.active == 1 ? 'Active' : 'Deactivated' } </p>
+                        <p><span style={{fontWeight: "bold"}}>Status:</span> {val.active == 1 ? 'Active' : 'Deactivated' } </p>
                         <button style ={{"marginLeft": "450px"}} onClick= {() => {updateStatus(val.username, val.active)}}> {val.active == 1 ? 'Deactivate' : 'Activate'} </button>
                     </div>
                 </form>
