@@ -3,6 +3,7 @@ const db = require("./database.js")
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const router = require("./routes/userRouting");
+const grpRouter = require("./routes/groupRouting");
 const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -30,6 +31,7 @@ app.use(cors(corsOptions));
 app.use(cookieParser())
 
 app.use("/", router);
+app.use("/", grpRouter);
 
 app.listen(3001, () => {
     console.log(`\n\n

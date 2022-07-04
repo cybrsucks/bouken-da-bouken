@@ -51,7 +51,7 @@ select * from studydb.group;
 select * from studydb.user;
 select * from studydb.usergroup;
 
--- create new usergroup 
+-- create new usergroup usergroup
 INSERT INTO `usergroup` (`groupID`, `groupName`, `username`, `role`) 
 VALUES (1, 'administrator', 'admin', 'admin');
 

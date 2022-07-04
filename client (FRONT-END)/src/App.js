@@ -13,6 +13,7 @@ import Dashboard from "./components/Dashboard";
 import UserMgmt from "./components/user/UserMgmt";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DisplayUserStatus from "./components/admin/DisplayUserStatus";
+import DisplayGroups from "./components/admin/DisplayGroups";
 
 function App() {
   return (
@@ -23,7 +24,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/getUsers" element={<GetUsers />} />
         
-        
         <Route path="/dashboard" 
           element={<ProtectedRoute>  <Dashboard />  </ProtectedRoute>}/> 
         <Route path="/user/create" 
@@ -31,12 +31,12 @@ function App() {
         <Route path="/user/displayStatus" 
           element={<ProtectedRoute>  <DisplayUserStatus />  </ProtectedRoute>} />
 
-
         // incomplete/TODO: logged in user can still access login input page
-
         <Route path="/user/manage" element={<UserMgmt />} />
         <Route path="/user/updateEmail" element={<UpdateEmail />} />
         <Route path="/user/changePassword" element={<ChangePwd />} />
+
+        <Route path="/groups/displayGroups" element={<DisplayGroups /> }/>
       </Routes>
     </div></>
   )

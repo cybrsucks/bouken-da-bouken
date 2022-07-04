@@ -1,0 +1,26 @@
+const sql = require("../database.js");
+const crypto = require('crypto');
+const jwt = require("jsonwebtoken");
+const secret = 'secret';
+
+const Group = function (group) {
+    this.groupID = group.groupID;
+    this.groupName = group.groupName;
+};
+
+//  called by exports.user_All in userController
+Group.displayGroups = (result) => {
+    sql.query(`SELECT * FROM studydb.group`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            result(null, res); //returns null err and result object
+            return;
+        }
+    });
+};
+
+module.exports = Group;

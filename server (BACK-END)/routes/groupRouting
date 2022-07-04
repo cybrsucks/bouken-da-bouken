@@ -1,0 +1,9 @@
+const express = require("express");
+const grpRouter = express.Router();
+const Group = require('../model/groupModel')
+const groupController = require("../controllers/groupController");
+
+
+grpRouter.get("/groups/displayGroups", groupController.groupList); //working
+
+module.exports = grpRouter;
