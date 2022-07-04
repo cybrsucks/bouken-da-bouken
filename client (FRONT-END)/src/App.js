@@ -31,7 +31,6 @@ function App() {
         <Route path="/user/displayStatus" 
           element={<ProtectedRoute>  <DisplayUserStatus />  </ProtectedRoute>} />
 
-        // incomplete/TODO: logged in user can still access login input page
         <Route path="/user/manage" element={<UserMgmt />} />
         <Route path="/user/updateEmail" element={<UpdateEmail />} />
         <Route path="/user/changePassword" element={<ChangePwd />} />

@@ -43,7 +43,7 @@ function DisplayUserStatus() {
 
             {userList.map((val) => {
             return (
-                <form>
+                <form key={val.username}>
                     <div className="user">
                         <p><span style={{fontWeight: "bold"}}>Username:</span> {val.username}</p>
                         <p><span style={{fontWeight: "bold"}}>Email:</span> {val.email}</p>

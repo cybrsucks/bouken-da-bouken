@@ -16,11 +16,12 @@ function GetUsers() {
     <button onClick={GetUsers}>List User</button> 
         {userList.map((val, key) => {
         return (
-            <div className="user">
+            <div className="user" key={val.id}>
                 <p>ID: {val.id}</p>
                 <p>Username: {val.username}</p>
                 <p>Email: {val.email}</p>
-                <p>Password: {val.password}</p>
+                <p>Password: {val.encryptedPassword}</p>
+                <p>Groups: {val.groups}</p>
                 <p>Status: {val.active}</p>
             </div>
             );
