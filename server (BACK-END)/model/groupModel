@@ -40,4 +40,19 @@ Group.usergroupList = (result) => {
     });
 };
 
+
+Group.assign = (usergrpArr, username, result) => {
+    console.log("usergrpArr: ", usergrpArr);
+    sql.query(`UPDATE user SET groupings = ? where username = ?`, [usergrpArr, username], (err, res) => {
+        if (err) {
+            // console.log("error: ", err);
+            result(err, null);
+        }
+        if (res.length) {
+            result(null, res[0]); //returns null err and result object
+            return;
+        }
+    });
+}
+
 module.exports = Group;

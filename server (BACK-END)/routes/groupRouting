@@ -8,6 +8,7 @@ const groupController = require("../controllers/groupController");
 
 grpRouter.get("/groups/displayGroups", groupController.groupList); //working
 grpRouter.get("/groups/groupCheckList", groupController.groupChecklist); 
+grpRouter.post("/groups/updateGroups", groupController.groupUpdate)
 // router.get("/groups/displayGroups", userController.user_All)
 
 module.exports = grpRouter;
