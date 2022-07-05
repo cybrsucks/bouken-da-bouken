@@ -37,13 +37,14 @@ function GroupChecklist() {
                         <p><span style={{fontWeight: "bold"}}>Username:</span> {val.username}</p>
                         
                         {groupArray.map((group) => {
+                            console.log(groupArray)
                             return(
                                 <div key={group}>
                                     <label> {group} </label>
                                     <input type="checkbox" value={group} defaultChecked={val.groupings.split(",").includes(group)} key={val}/>
                                 </div>
                             )
-                        })}
+                        })} 
 
                         <p><span style={{fontWeight: "bold"}}>Status:</span> {val.active == 1 ? 'Active' : 'Deactivated' } </p>
                         {/* <button style ={{"marginLeft": "450px"}} onClick= {() => {updateStatus(val.username, val.active)}}> {val.active == 1 ? 'Deactivate' : 'Activate'} </button> */}
