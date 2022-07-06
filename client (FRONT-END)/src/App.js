@@ -26,20 +26,18 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/getUsers" element={<GetUsers />} />
         
-        <Route path="/dashboard" 
-          element={<ProtectedRoute>  <Dashboard />  </ProtectedRoute>}/> 
-        <Route path="/user/create" 
-          element={<ProtectedRoute>  <CreateUser />  </ProtectedRoute>} />
-        <Route path="/user/displayStatus" 
-          element={<ProtectedRoute>  <DisplayUserStatus />  </ProtectedRoute>} />
+        <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/user/create" element={<CreateUser />} />
+            <Route path="/user/displayStatus" element={<DisplayUserStatus />} />
+            <Route path="/user/manage" element={<UserMgmt />} />
+            <Route path="/user/updateEmail" element={<UpdateEmail />} />
+            <Route path="/user/changePassword" element={<ChangePwd />} />
 
-        <Route path="/user/manage" element={<UserMgmt />} />
-        <Route path="/user/updateEmail" element={<UpdateEmail />} />
-        <Route path="/user/changePassword" element={<ChangePwd />} />
-
-        <Route path="/groups/displayGroups" element={<DisplayGroups /> }/>
-        <Route path="/groups/groupChecklist" element={<GroupChecklist /> }/>
-        <Route path="/groups/manage" element={<GroupMgmt /> }/>
+            <Route path="/groups/displayGroups" element={<DisplayGroups /> }/>
+            <Route path="/groups/groupChecklist" element={<GroupChecklist /> }/>
+            <Route path="/groups/manage" element={<GroupMgmt /> }/>
+        </Route>
       </Routes>
     </div></>
   )
