@@ -3,11 +3,15 @@ import Axios from "axios"
 
 function DisplayGroups() {
     const [usergroupList, setUsergroupList] = useState([]);
+    const [userList, setUserList] = useState([]);
 
-    Axios.get("http://localhost:3001/groups/displayGroups", { withCredentials: true })
+    Axios.get("http://localhost:3001/groups/displayGroups", {
+            withCredentials: true
+        })
         .then((response) => {
             setUsergroupList(response.data);
-    })
+        })
+
     return (
         <div className="information">
             <h5> <span> usergroups </span> </h5>

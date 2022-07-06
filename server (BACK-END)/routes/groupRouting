@@ -3,7 +3,9 @@ const grpRouter = express.Router();
 const Group = require('../model/groupModel')
 const groupController = require("../controllers/groupController");
 
-
 grpRouter.get("/groups/displayGroups", groupController.groupList); //working
+grpRouter.get("/groups/groupCheckList", groupController.groupChecklist); 
+grpRouter.post("/groups/updateGroups", groupController.groupUpdate)
 
 module.exports = grpRouter;
+// module.exports = router;

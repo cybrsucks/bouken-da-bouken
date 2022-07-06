@@ -1,5 +1,4 @@
 const sql = require("../database.js");
-// const bcrypt = require("bcryptjs");
 const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
 const secret = 'secret';
@@ -10,6 +9,7 @@ const User = function (user) {
     this.email = user.email;
     this.password = user.password;
     this.token = user.token;
+    this.groupings = user.groupings;
 };
 
 //  called by exports.user_creation in userController
@@ -18,7 +18,7 @@ User.create = async (newUser, result) => {
     const { username, email, password } = newUser;
     encryptedPassword = crypto.createHmac('sha256', secret).update(password).digest('hex');
     sql.query(
-        `INSERT INTO user SET ?`, [username, email, encryptedPassword], (err, res) => {
+        `INSERT INTO user (username, email, encryptedPassword, groupings) VALUES (?,?,?,?)`, [username, email, encryptedPassword, ""], (err, res) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);

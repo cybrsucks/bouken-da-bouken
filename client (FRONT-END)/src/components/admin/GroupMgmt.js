@@ -1,40 +1,34 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Axios from "axios"
 
-function Dashboard() {
-    Axios.get("http://localhost:3001/dashboard",  { withCredentials: true })
-        .then((response) => {
-            document.getElementById("welcomeBanner").innerHTML = response.data;
-        })
-
+function GroupMgmt() {
     return (
-    <div className="information">
+        <div className="information">
         <div className="container">
-            <h5> Welcome, <span id="welcomeBanner"> username </span> ! </h5>
             <div className="row align-items-center" style={{height: '100px'}}>
                 <div className="col">
                     <div>
-                        <Link to="/user/manage/" className="dashboard-link">
+                        <Link to="/groups/groupChecklist" className="dashboard-link">
                             <div>
-                            User Management 
+                            Update groupings of users
                             </div>
                         </Link>
                     </div> 
                 </div>
                 <div className="col">
                     <div>
-                        <Link to="/groups/manage" className="dashboard-link">
+                        <Link to="/groups/displayGroups" className="dashboard-link">
                             <div>
-                            Group Management 
+                            Lists all groups created
                             </div>
                         </Link>
                     </div> 
                 </div>
             </div>
         </div>
-    </div> 
+        </div> 
+
     )
 }
 
-export default Dashboard;
+export default GroupMgmt;
