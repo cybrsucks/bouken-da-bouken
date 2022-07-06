@@ -24,13 +24,14 @@ function Login() {
         Axios.post("http://localhost:3001/login", {
                 email: email,
                 password: password,
+            }, {
+                withCredentials: true
             })
             .then((response) => {
                 console.log(response)
                 if (sessionStorage.username === "") {
                     console.log(response.data);
                     sessionStorage.setItem('username', response.data.username);
-                    sessionStorage.setItem('JWT', response.data.token)
                 }
                 navigate("/dashboard");
             })
