@@ -31,7 +31,7 @@ CREATE TABLE `usergroup` (
 
 
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
-VALUES (1, 'admin', 'admin@min.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'ADMIN', 1);
+VALUES (1, 'admin', 'admin@min.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'ADMIN,G1,G2', 1);
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
 VALUES (2, 'user1', 'user1@grAup.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G1', 1);
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 

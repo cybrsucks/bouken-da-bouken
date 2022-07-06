@@ -14,7 +14,6 @@ Group.displayGroups = (result) => {
             return;
         }
         if (res.length) {
-
             result(null, res); //returns null err and result object
             return; 
         }

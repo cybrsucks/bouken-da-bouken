@@ -5,8 +5,9 @@ function UserPartial({user}) {
     const [groupArray, setGroupArray] = useState([]);
     const [currentGroup, setCurrentGroup] = useState(user.groupings);
 
-    const UpdateGroup = (e) => {
-        e.preventDefault();
+    // const UpdateGroup = (e) => {
+    //     e.preventDefault();
+    const UpdateGroup = () => {
         console.log(user); // user object
         console.log(currentGroup) // updated state of userGroupings
         const userGroupings = user.groupings; // original state of userGroupings
@@ -53,15 +54,6 @@ function UserPartial({user}) {
                 <div className="user">
                     <p><span style={{fontWeight: "bold"}}>Username:</span> {user.username}</p>
                     {groupArray.map((group) => {
-                        // console.log(group)
-
-
-
-                        // 5/7/2022: Wanzhen, your app "http://localhost:3000/groups/groupCheckList" wont run properly because the group "G3" has null users, 
-                        // and the program jibabooms because .split does not work on a null string. Fix this thanks
-
-
-
                         return(
                             <div key={group}>
                                 <label> {group} </label>
@@ -69,7 +61,7 @@ function UserPartial({user}) {
                             </div>
                         )
                     })} 
-                    <p><span style={{fontWeight: "bold"}}>Status:</span> {user.active == 1 ? 'Active' : 'Deactivated' } </p>
+                    <p><span style={{fontWeight: "bold"}}>Status:</span> {user.active == 1 ? '🟢' : '🔴' } </p>
                     <button type="submit" onClick={UpdateGroup}>Sus</button>
                 </div>
             </form>
