@@ -1,4 +1,4 @@
-let longGroup = "ADMIN,G1,G2"
+let longGroup = ""
 const myArray = longGroup.split(",");
 console.log(myArray)
 var longGroupings = "";

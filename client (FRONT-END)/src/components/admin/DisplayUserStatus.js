@@ -1,35 +1,43 @@
-import React, { useState } from "react"
+import React, {useState} from "react"
 import Axios from "axios"
 
 function DisplayUserStatus() {
     const [userList, setUserList] = useState([]);
 
-    Axios.get("http://localhost:3001/user/displayStatus", { withCredentials: true })
+    Axios.get("http://localhost:3001/user/displayStatus", {
+            withCredentials: true
+        })
         .then((response) => {
             setUserList(response.data);
-    })
+        })
 
-    function updateStatus(username, status){
-        if (status == 1){
-            // console.log("aaaaaaaaaaaaaaaaaaa")
-            Axios.post("http://localhost:3001/user/updateStatus", { username: username, active: status }, { withCredentials: true })
+    function updateStatus(username, status) {
+        if (status == 1) {
+            Axios.post("http://localhost:3001/user/updateStatus", {
+                    username: username,
+                    active: status
+                }, {
+                    withCredentials: true
+                })
                 .then((response) => {
                     alert("status 1 updated successfully")
-                }
-                ).catch ((err) => {
+                }).catch((err) => {
                     console.log(err)
                 })
         }
-        if (status == 0){
-            Axios.post("http://localhost:3001/user/updateStatus", { username: username, active: status }, { withCredentials: true })
+        if (status == 0) {
+            Axios.post("http://localhost:3001/user/updateStatus", {
+                    username: username,
+                    active: status
+                }, {
+                    withCredentials: true
+                })
                 .then((response) => {
                     alert("status 0 updated successfully")
-                }
-                ).catch ((err) => {
+                }).catch((err) => {
                     console.log(err)
                 })
         }
-
     }
 
     return (

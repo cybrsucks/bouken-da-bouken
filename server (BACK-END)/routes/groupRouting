@@ -2,14 +2,10 @@ const express = require("express");
 const grpRouter = express.Router();
 const Group = require('../model/groupModel')
 const groupController = require("../controllers/groupController");
-// const router = express.Router();
-// const userController = require("../controllers/userController");
-
 
 grpRouter.get("/groups/displayGroups", groupController.groupList); //working
 grpRouter.get("/groups/groupCheckList", groupController.groupChecklist); 
 grpRouter.post("/groups/updateGroups", groupController.groupUpdate)
-// router.get("/groups/displayGroups", userController.user_All)
 
 module.exports = grpRouter;
 // module.exports = router;

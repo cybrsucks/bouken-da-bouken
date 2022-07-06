@@ -8,8 +8,6 @@ function Login() {
     if (activeCookies) {
         Cookies.remove('JWT');
     }
-    
-    // const [username, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -18,22 +16,20 @@ function Login() {
     let navigate = useNavigate();
 
     const Login = () => {
-
-        // if (username === "" || password === "") {
         if (email === "" || password === "") {
             setError("Fields are required");
             return;
         }
 
         Axios.post("http://localhost:3001/login", {
-                // username: username,
-                email, email,
+                email,
+                email,
                 password: password,
-            },{ withCredentials: true })
+            }, {
+                withCredentials: true
+            })
             .then((response) => {
-                // remove this to disallow JWT_token in localStorage
                 if (sessionStorage.username === "") {
-                    // alert(response.data.token)
                     console.log(response.data);
                     sessionStorage.setItem('username', response.data.username);
                 }
@@ -47,12 +43,6 @@ function Login() {
 
     return ( 
         <div className = "information" >
-        {/* <label> Username: </label> 
-        <input type = "text" onChange = {
-            (event) => {
-                setName(event.target.value);
-            }
-        }/>  */}
             <label> Email: </label> 
             <input type = "email" onChange = {(event) => {setEmail(event.target.value);}}/> 
             <label> Password: </label> 

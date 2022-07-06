@@ -5,16 +5,12 @@ function DisplayGroups() {
     const [usergroupList, setUsergroupList] = useState([]);
     const [userList, setUserList] = useState([]);
 
-    Axios.get("http://localhost:3001/groups/displayGroups", { withCredentials: true })
+    Axios.get("http://localhost:3001/groups/displayGroups", {
+            withCredentials: true
+        })
         .then((response) => {
             setUsergroupList(response.data);
-    })
-
-    // Axios.get("http://localhost:3001/user/displayStatus", { withCredentials: true })
-    //     .then((response) => {
-    //         setUserList(response.data);
-    //         // console.log(response.data.username, response.data.groups);
-    // })
+        })
 
     return (
         <div className="information">

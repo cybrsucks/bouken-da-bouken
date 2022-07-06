@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import Axios from "axios"
 import UserPartial from "./UserPartial";
 
-function GroupChecklist() {
+function GroupChecklist() { 
     const [userList, setUserList] = useState([]);
 
     useEffect (() => {

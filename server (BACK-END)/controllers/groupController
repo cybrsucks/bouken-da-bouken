@@ -1,7 +1,4 @@
 const Group = require("../model/groupModel");
-const jwt = require('jsonwebtoken')
-const sql = require("../database.js");
-
 
 exports.groupList = (req, res) => {
     Group.displayGroups((err, data) => {

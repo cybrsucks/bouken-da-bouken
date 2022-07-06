@@ -51,6 +51,7 @@ select * from studydb.group;
 select * from studydb.user;
 
 SELECT username, groupings, active FROM studydb.user;
+SELECT count(*) from user;
 
 
 select * from studydb.usergroup;

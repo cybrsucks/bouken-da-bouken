@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import DisplayUserStatus from "./components/admin/DisplayUserStatus";
 import DisplayGroups from "./components/admin/DisplayGroups";
 import GroupChecklist from "./components/admin/GroupChecklist";
+import GroupMgmt from "./components/admin/GroupMgmt";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
 
         <Route path="/groups/displayGroups" element={<DisplayGroups /> }/>
         <Route path="/groups/groupChecklist" element={<GroupChecklist /> }/>
+        <Route path="/groups/manage" element={<GroupMgmt /> }/>
       </Routes>
     </div></>
   )

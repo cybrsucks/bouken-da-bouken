@@ -7,26 +7,20 @@ function UserPartial({user}) {
 
     const UpdateGroup = (e) => {
         e.preventDefault();
-        console.log(user);
-        
-        
-        console.log(currentGroup)
-        // alert(user.active);
-        const userGroupings = user.groupings;
-        // alert(groupArray);
-
-
-        alert(userGroupings);
-        // Axios.post("http://localhost:3001/groups/updateGroups", { withCredentials: true },
-        //     {
-
-
-        //     }
-        
-        // )
-        // .then((response) => {
-
-        // })
+        console.log(user); // user object
+        console.log(currentGroup) // updated state of userGroupings
+        const userGroupings = user.groupings; // original state of userGroupings
+        // alert(userGroupings);
+        Axios.post("http://localhost:3001/groups/updateGroups", {
+                username: user.username,
+                groupings: currentGroup
+            }, {
+                withCredentials: true
+            })
+            .then((response) => {
+                console.log(response.data);
+                alert(response.data);
+            })
     }
 
     // e = change in checkbox, 
@@ -60,6 +54,13 @@ function UserPartial({user}) {
                     <p><span style={{fontWeight: "bold"}}>Username:</span> {user.username}</p>
                     {groupArray.map((group) => {
                         // console.log(group)
+
+
+
+                        // 5/7/2022: Wanzhen, your app "http://localhost:3000/groups/groupCheckList" wont run properly because the group "G3" has null users, 
+                        // and the program jibabooms because .split does not work on a null string. Fix this thanks
+
+
 
                         return(
                             <div key={group}>
