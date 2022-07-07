@@ -81,10 +81,10 @@ exports.dashboard = (req, res) => {
                 console.log("INFO: Current user's groupings: ", groupings);
                 if (groupings.includes('ADMIN')) {
                     adminView = true;
-                    console.log("oonga boonga adminView is", adminView)
+                    console.log("adminView is", adminView)
                 }else{
                     adminView = false;
-                    console.log("oonga boonga adminView is", adminView)
+                    console.log("adminView is", adminView)
                     // navigate("/login")
                 }
             });
