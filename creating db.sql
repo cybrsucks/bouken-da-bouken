@@ -17,17 +17,6 @@ CREATE TABLE `user` (
   PRIMARY KEY (`groupID`),
   UNIQUE KEY `id_UNIQUE` (`groupID` ASC) VISIBLE);
 
--- CREATE TABLE `usergroup` (
---   `groupID` int NOT NULL,
---   `groupName` varchar(45) NOT NULL,
---   `username` varchar(45) NOT NULL,
---   `role` varchar(45) NOT NULL,
---   UNIQUE KEY `username_UNIQUE` (`username`),
---   UNIQUE KEY `groupID_UNIQUE` (`groupID`),
---   CONSTRAINT `groupID` FOREIGN KEY (`groupID`) REFERENCES `group` (`groupID`),
---   CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 -- admin, Apple2022!
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`)  
 VALUES (1, 'admin', 'admin@min.com', '301a25fb3f7d45a31cfaf7819f7fee4b3bd8318fdc14f232d37504f2371ebac5', 'ADMIN,G1,G2', 1);

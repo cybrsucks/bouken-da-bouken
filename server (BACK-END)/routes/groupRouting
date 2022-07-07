@@ -4,8 +4,9 @@ const Group = require('../model/groupModel')
 const groupController = require("../controllers/groupController");
 
 grpRouter.get("/groups/displayGroups", groupController.groupList); //working
-grpRouter.get("/groups/groupCheckList", groupController.groupChecklist); 
-grpRouter.post("/groups/updateGroups", groupController.groupUpdate)
+grpRouter.get("/groups/groupCheckList", groupController.groupChecklist); //working
+grpRouter.post("/groups/updateGroups", groupController.groupUpdate); //working
+grpRouter.post("/group/create", groupController.groupCreate)
 
 module.exports = grpRouter;
 // module.exports = router;

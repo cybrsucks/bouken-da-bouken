@@ -24,6 +24,15 @@ function GroupMgmt() {
                         </Link>
                     </div> 
                 </div>
+                <div className="col">
+                    <div>
+                        <Link to="/group/create" className="dashboard-link">
+                            <div>
+                            Create a new group
+                            </div>
+                        </Link>
+                    </div> 
+                </div>
             </div>
         </div>
         </div> 
