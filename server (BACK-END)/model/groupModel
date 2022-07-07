@@ -71,10 +71,8 @@ Group.create = (groupName, result) => {
                     result(err, null);
                     return;
                 }
-                if (res.length) {
-                    result(null, res); //returns null err and result object
-                    return;
-                }
+                result(null, res); //returns null err and result object
+                return;
             });
         }
     })

@@ -15,12 +15,16 @@ function CreateGroup() {
     const [groupName, setGroupName] = useState('');
 
     const CreateGroup = () => {
-    Axios.post('http://localhost:3001/group/create', {groupName: groupName}).then(() => {
-        alert("Created new group!");
-    }).catch(
-        (err) => {
-            console.log(err.response.data.message);
-            alert(err.response.data.message);
+    Axios.post('http://localhost:3001/group/create', {
+        groupName: groupName
+        }).then(
+            () => {
+                console.log("Success");
+                alert("Success!");
+        }).catch(
+            (err) => {
+                // console.log(err.response.data.message);
+                alert(err.response.data.message);
         });
     };
     

@@ -66,11 +66,11 @@ exports.login = (req, res) => {
 
 exports.dashboard = (req, res) => {
     // const jwt_cookie = req.cookies.JWT;
-    console.log("\n")
-    console.log("INFO: req.cookies: ", req.cookies);
+    // console.log("\n")
+    // console.log("INFO: req.cookies: ", req.cookies);
     // res.end()
     const token = req.cookies.JWT;
-    console.log(token)
+    // console.log(token)
     if (token) {
         jwt.verify(token, 'hello', async (err, decodedToken) => {
             const currentUser = decodedToken.username;
@@ -78,18 +78,18 @@ exports.dashboard = (req, res) => {
 
             sql.query(`SELECT groupings FROM user WHERE username = ?`, [currentUser], (err, res) => {
                 const groupings = (res[0]).groupings;
-                console.log("INFO: Current user's groupings: ", groupings);
+                // console.log("INFO: Current user's groupings: ", groupings);
                 if (groupings.includes('ADMIN')) {
                     adminView = true;
-                    console.log("adminView is", adminView)
+                    // console.log("adminView is", adminView)
                 }else{
                     adminView = false;
-                    console.log("adminView is", adminView)
+                    // console.log("adminView is", adminView)
                     // navigate("/login")
                 }
             });
 
-            console.log("INFO: Current user's decodedToken: ", decodedToken);
+            // console.log("INFO: Current user's decodedToken: ", decodedToken);
             // res.send({currentUser: currentUser, adminView: adminView});
             res.send(currentUser);
         });

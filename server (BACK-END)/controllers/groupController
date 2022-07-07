@@ -18,7 +18,7 @@ exports.groupChecklist = (req, res) => {
             res.status(404).send({
             message: "Error listing all user groups"
             });
-        } else res.send(data); // sends data to front-end
+        } else res.send("success!"); // sends data to front-end
     })
 }
 
@@ -45,13 +45,13 @@ exports.groupUpdate = (req, res) => {
 
 
 exports.groupCreate = (req, res) => {
-    const groupName = req.body.groupName;
+    const groupName = (req.body.groupName).trim();
 
     Group.create(groupName, (err, data) => {
         if (err) {
             res.status(404).send({message: err});
         } else {
-            res.message("success"); // sends data to front-end
+            res.status(200).send(data); // sends data to front-end
         }
     })
 }
