@@ -8,7 +8,8 @@ function ChangePwd() {
             console.log(response.data);
             // console.log("a21");
             document.getElementById("userDeets-username").innerHTML = response.data.username;
-            document.getElementById("userDeets-password").innerHTML = response.data.encryptedPassword;
+            // document.getElementById("userDeets-password").innerHTML = (response.data.encryptedPassword);
+            document.getElementById("userDeets-password").innerHTML = (response.data.encryptedPassword).slice(-6, -1);
     })
 
     function CheckPassword(inputtxt) { 
@@ -48,7 +49,7 @@ function ChangePwd() {
         <div className="information">
         <h5> <span> User: Change Own Password </span> </h5>
         <h6> Username : <span id="userDeets-username">  </span> </h6>
-        <h6> Password : <span id="userDeets-password"> </span> </h6>
+        <h6> Password : *****<span id="userDeets-password"> </span> </h6>
         <div> 
             <input type="text" placeholder="Password" onChange={(event) => { setNewPassword(event.target.value); }}/>
             <button onClick={() => { ChangePwd(), window.location.reload(false)}}> Change Password </button>
