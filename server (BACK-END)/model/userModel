@@ -72,6 +72,11 @@ User.authentication = (username, pwd, result) => {
     hashedPwd = crypto.createHmac('sha256', secret).update(pwd).digest('hex');
     sql.query(`SELECT * FROM user where username = "${username}"`, (err, res) => {
         const User = res[0];
+        if (User.active == 0){
+            err = "INFO: User account is deactivated"
+            result(err, null); //returns null err and result object
+            return;
+        }
         if ((res.length && hashedPwd === User.encryptedPassword) && (User.active == 1)){
             console.log("INFO: Login details are correct");
             console.log("INFO: Username of current logged in user: ", User.username)

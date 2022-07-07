@@ -16,9 +16,9 @@ function CreateUser() {
                 console.log("Success");
                 alert("Success!");
         }).catch(
-            (response) => {
-                // console.log(response.response.data.message);
-                alert(response.response.data.message);
+            (err) => {
+                // console.log(err.response.data.message);
+                alert(err.response.data.message);
         });
     };
     

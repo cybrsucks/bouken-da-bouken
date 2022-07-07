@@ -39,8 +39,9 @@ function Login() {
                 navigate("/dashboard");
             })
             .catch((err) => {
-                console.log(err);
-                setError("Incorrect username/password");
+                // console.log(err);
+                // console.log(err.response.data.message)
+                setError(err.response.data.message);
             });
     };
 
