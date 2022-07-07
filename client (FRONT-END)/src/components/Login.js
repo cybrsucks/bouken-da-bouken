@@ -5,10 +5,13 @@ import Cookies from 'js-cookie';
 
 function Login() {
     const activeCookies = Cookies.get('JWT');
-    if (activeCookies) {
+    const activeUser = sessionStorage.username;
+    if (activeCookies || activeUser) {
         Cookies.remove('JWT');
+        sessionStorage.setItem('username', "");
     }
-    const [email, setEmail] = useState("");
+
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const [err, setError] = useState("");
@@ -16,13 +19,13 @@ function Login() {
     let navigate = useNavigate();
 
     const Login = () => {
-        if (email === "" || password === "") {
+        if (username === "" || password === "") {
             setError("Fields are required");
             return;
         }
 
         Axios.post("http://localhost:3001/login", {
-                email: email,
+                username: username,
                 password: password,
             }, {
                 withCredentials: true
@@ -37,14 +40,14 @@ function Login() {
             })
             .catch((err) => {
                 console.log(err);
-                setError("Incorrect email/password");
+                setError("Incorrect username/password");
             });
     };
 
     return ( 
         <div className = "information" >
-            <label> Email: </label> 
-            <input type = "email" onChange = {(event) => {setEmail(event.target.value);}}/> 
+            <label> Username: </label> 
+            <input type = "username" onChange = {(event) => {setUsername(event.target.value);}}/> 
             <label> Password: </label> 
             <input type = "password" onChange = {(event) => {setPassword(event.target.value);}}/> 
             <button onClick = {() => {Login(), window.location.reload}}> Login </button>

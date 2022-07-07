@@ -26,6 +26,15 @@ function UserMgmt() {
                 </div>
                 <div className="col">
                     <div>
+                        <Link to="/user/create" className="dashboard-link">
+                            <div>
+                            Create New User
+                            </div>
+                        </Link>
+                    </div> 
+                </div>
+                <div className="col">
+                    <div>
                         <Link to="/user/displayStatus" className="dashboard-link">
                             <div>
                             Update User Status
@@ -33,11 +42,18 @@ function UserMgmt() {
                         </Link>
                     </div> 
                 </div>
+                <div className="col">
+                    <div>
+                        <Link to="/user/updateUserProfile" className="dashboard-link">
+                            <div>
+                            Update User Email/Password
+                            </div>
+                        </Link>
+                    </div> 
+                </div>
             </div>
         </div>
         </div> 
-
     )
 }
-
 export default UserMgmt;

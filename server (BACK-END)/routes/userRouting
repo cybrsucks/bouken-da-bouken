@@ -14,4 +14,8 @@ router.post("/user/updateEmail", userController.update_email); // working
 router.post("/changePassword", userController.change_password); // working
 router.get("/user/displayStatus", userController.user_statusList); // working
 router.post("/user/updateStatus", userController.user_status); // working
+
+router.get("/getUserProfiles", userController.adminUserProfiles); //working
+router.post("/adminUpdateUserEmail", userController.adminUpdateUserEmail)
+router.post("/adminUpdateUserPwd", userController.adminUpdateUserPwd)
 module.exports = router;

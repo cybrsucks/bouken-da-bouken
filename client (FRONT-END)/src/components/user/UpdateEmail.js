@@ -28,7 +28,7 @@ function UpdateEmail() {
 
     return (
         <div className="information">
-        <h5> <span> user details </span> </h5>
+        <h5> <span> User: Update Own Email </span> </h5>
         <h6> Username : <span id="userDeets-username">  </span> </h6>
         <h6> Email : <span id="userDeets-email">  </span> </h6>
         <div> 

@@ -11,16 +11,21 @@ function CreateUser() {
         username: username,
         email: email,
         password: password,
-    }).then(() => {
-        console.log("Success");
-        alert("Success!");
-    });
+        }).then(
+            () => {
+                console.log("Success");
+                alert("Success!");
+        }).catch(
+            (response) => {
+                // console.log(response.response.data.message);
+                alert(response.response.data.message);
+        });
     };
     
 
     return (
     <div className="information">
-        <h5> <span> Create new user </span> </h5>
+        <h5> <span> Admin: Create new user </span> </h5>
         <div className="information">
         <label>Username:</label>
             <input type="text" onChange={(event) => { setName(event.target.value) }} />

@@ -16,6 +16,7 @@ import DisplayUserStatus from "./components/admin/DisplayUserStatus";
 import DisplayGroups from "./components/admin/DisplayGroups";
 import GroupChecklist from "./components/admin/GroupChecklist";
 import GroupMgmt from "./components/admin/GroupMgmt";
+import UpdateUserProfile from "./components/admin/UpdateUserProfile";
 
 function App() {
   return (
@@ -28,12 +29,14 @@ function App() {
         
         <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/user/create" element={<CreateUser />} />
-            <Route path="/user/displayStatus" element={<DisplayUserStatus />} />
-            <Route path="/user/manage" element={<UserMgmt />} />
+
             <Route path="/user/updateEmail" element={<UpdateEmail />} />
             <Route path="/user/changePassword" element={<ChangePwd />} />
-
+            
+            <Route path="/user/manage" element={<UserMgmt />} />
+            <Route path="/user/create" element={<CreateUser />} />
+            <Route path="/user/displayStatus" element={<DisplayUserStatus />} />
+            <Route path="/user/updateUserProfile" element={<UpdateUserProfile />} />
             <Route path="/groups/displayGroups" element={<DisplayGroups /> }/>
             <Route path="/groups/groupChecklist" element={<GroupChecklist /> }/>
             <Route path="/groups/manage" element={<GroupMgmt /> }/>

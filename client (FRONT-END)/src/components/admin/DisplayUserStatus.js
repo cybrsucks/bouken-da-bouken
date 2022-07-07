@@ -42,7 +42,7 @@ function DisplayUserStatus() {
 
     return (
         <div className="information">
-            <h5> <span> user details </span> </h5>
+            <h5> <span> Admin: Update User Status </span> </h5>
 
             {userList.map((val) => {
             return (
@@ -50,18 +50,12 @@ function DisplayUserStatus() {
                     <div className="user">
                         <p><span style={{fontWeight: "bold"}}>Username:</span> {val.username}</p>
                         <p><span style={{fontWeight: "bold"}}>Email:</span> {val.email}</p>
-                        <p><span style={{fontWeight: "bold"}}>Status:</span> {val.active == 1 ? 'Active' : 'Deactivated' } </p>
+                        <p><span style={{fontWeight: "bold"}}>Status:</span> {val.active == 1 ? '🟢' : '🔴' } </p>
                         <button style ={{"marginLeft": "450px"}} onClick= {() => {updateStatus(val.username, val.active)}}> {val.active == 1 ? 'Deactivate' : 'Activate'} </button>
                     </div>
                 </form>
             );
             })}
-
-            {/* <span id="userDeets-status">  </span> */}
-            {/* <h6> Status : <input style={{height: '20px', width: '20px'}} type="checkbox" checked={newStatus} onChange={handleOnChange}/> </h6>  */}
-            {/* <div> 
-                <button onClick={() => { ActivateUser(), window.location.reload(false)}}> Update Status </button>
-            </div> */}
         </div> 
     )
 }

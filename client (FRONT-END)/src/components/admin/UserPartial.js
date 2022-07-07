@@ -20,7 +20,6 @@ function UserPartial({user}) {
             })
             .then((response) => {
                 console.log(response.data);
-                alert(response.data);
             })
     }
 
@@ -49,23 +48,21 @@ function UserPartial({user}) {
     })
 
     return (
-
-            <form key={user.username}>
-                <div className="user">
-                    <p><span style={{fontWeight: "bold"}}>Username:</span> {user.username}</p>
-                    {groupArray.map((group) => {
-                        return(
-                            <div key={group}>
-                                <label> {group} </label>
-                                <input type="checkbox" value={group} defaultChecked={user.groupings.split(",").includes(group)} key={user} onChange={onChangeHandler}/>
-                            </div>
-                        )
-                    })} 
-                    <p><span style={{fontWeight: "bold"}}>Status:</span> {user.active == 1 ? '🟢' : '🔴' } </p>
-                    <button type="submit" onClick={UpdateGroup}>Sus</button>
-                </div>
-            </form>
-
+        <form key={user.username}>
+            <div className="user">
+                <p><span style={{fontWeight: "bold"}}>Username:</span> {user.username}</p>
+                {groupArray.map((group) => {
+                    return(
+                        <div key={group}>
+                            <label> {group} </label>
+                            <input type="checkbox" value={group} defaultChecked={user.groupings.split(",").includes(group)} key={user} onChange={onChangeHandler}/>
+                        </div>
+                    )
+                })} 
+                <p><span style={{fontWeight: "bold"}}>Status:</span> {user.active == 1 ? '🟢' : '🔴' } </p>
+                <button type="submit" onClick={UpdateGroup}>Sus</button>
+            </div>
+        </form>
     )
 }
 
