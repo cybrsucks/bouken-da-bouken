@@ -14,6 +14,9 @@ import UserMgmt from "./components/user/UserMgmt";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DisplayUserStatus from "./components/admin/DisplayUserStatus";
 import DisplayGroups from "./components/admin/DisplayGroups";
+import GroupChecklist from "./components/admin/GroupChecklist";
+import GroupMgmt from "./components/admin/GroupMgmt";
+import UpdateUserProfile from "./components/admin/UpdateUserProfile";
 
 function App() {
   return (
@@ -24,18 +27,20 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/getUsers" element={<GetUsers />} />
         
-        <Route path="/dashboard" 
-          element={<ProtectedRoute>  <Dashboard />  </ProtectedRoute>}/> 
-        <Route path="/user/create" 
-          element={<ProtectedRoute>  <CreateUser />  </ProtectedRoute>} />
-        <Route path="/user/displayStatus" 
-          element={<ProtectedRoute>  <DisplayUserStatus />  </ProtectedRoute>} />
+        <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
 
-        <Route path="/user/manage" element={<UserMgmt />} />
-        <Route path="/user/updateEmail" element={<UpdateEmail />} />
-        <Route path="/user/changePassword" element={<ChangePwd />} />
-
-        <Route path="/groups/displayGroups" element={<DisplayGroups /> }/>
+            <Route path="/user/updateEmail" element={<UpdateEmail />} />
+            <Route path="/user/changePassword" element={<ChangePwd />} />
+            
+            <Route path="/user/manage" element={<UserMgmt />} />
+            <Route path="/user/create" element={<CreateUser />} />
+            <Route path="/user/displayStatus" element={<DisplayUserStatus />} />
+            <Route path="/user/updateUserProfile" element={<UpdateUserProfile />} />
+            <Route path="/groups/displayGroups" element={<DisplayGroups /> }/>
+            <Route path="/groups/groupChecklist" element={<GroupChecklist /> }/>
+            <Route path="/groups/manage" element={<GroupMgmt /> }/>
+        </Route>
       </Routes>
     </div></>
   )

@@ -1,6 +1,4 @@
 const Group = require("../model/groupModel");
-const jwt = require('jsonwebtoken')
-
 
 exports.groupList = (req, res) => {
     Group.displayGroups((err, data) => {
@@ -12,3 +10,34 @@ exports.groupList = (req, res) => {
     })
 }
 
+
+
+exports.groupChecklist = (req, res) => {
+    Group.usergroupList((err, data) => {
+        if (err) {
+            res.status(404).send({
+            message: "Error listing all user groups"
+            });
+        } else res.send(data); // sends data to front-end
+    })
+}
+
+
+
+exports.groupUpdate = (req, res) => {
+    const usergrpArr = req.body.groupings;
+    const username = req.body.username;
+
+    Group.assign(usergrpArr, username, (err, data) => {
+        if (err) {
+            res.status(404).send({
+            message: "Error beeep"
+            });
+        } else {
+            res.message("success"); // sends data to front-end
+        }
+        res.send(data)
+    })
+    
+    res.end()
+}

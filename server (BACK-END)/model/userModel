@@ -1,5 +1,4 @@
 const sql = require("../database.js");
-// const bcrypt = require("bcryptjs");
 const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
 const secret = 'secret';
@@ -10,6 +9,7 @@ const User = function (user) {
     this.email = user.email;
     this.password = user.password;
     this.token = user.token;
+    this.groupings = user.groupings;
 };
 
 //  called by exports.user_creation in userController
@@ -17,23 +17,33 @@ const User = function (user) {
 User.create = async (newUser, result) => {
     const { username, email, password } = newUser;
     encryptedPassword = crypto.createHmac('sha256', secret).update(password).digest('hex');
-    sql.query(
-        `INSERT INTO user SET ?`, [username, email, encryptedPassword], (err, res) => {
-            if (err) {
-                console.log("error: ", err);
-                result(err, null);
-                return;
-            }
-            // return new user
-            console.log(`INFO: user created successfully with: `, {
-                id: res.insertId,
-                ...newUser,
-            });
-            result(null, res);
-            // console.log(res)
+
+    sql.query('SELECT COUNT(username) as countUsername FROM user WHERE username = ?', [username], (err, res) => {
+        console.log("Creating user check... number of occurences of username", res[0].countUsername)
+        if (res[0].countUsername > 0){
+            err = 'error: duplicate entry in database'
+            result(err, null);
             return;
+        }else{
+            sql.query(
+                `INSERT INTO user (username, email, encryptedPassword, groupings) VALUES (?,?,?,?)`, [username, email, encryptedPassword, ""], (err, res) => {
+                    if (err) {
+                        console.log("error: ", err.message);
+                        result(err, null);
+                        return;
+                    }
+                    // return new user
+                    console.log(`INFO: user created successfully with: `, {
+                        id: res.insertId,
+                        ...newUser,
+                    });
+                    result(null, res);
+                    // console.log(res)
+                    return;
+                }
+            );
         }
-    );
+    })
 };
 
 
@@ -58,10 +68,15 @@ User.selectAll = (result) => {
 
 //  called by exports.login in userController
 //  used to auth user and create user's JWT token upon login and access protected routes
-User.authentication = (email, pwd, result) => {
+User.authentication = (username, pwd, result) => {
     hashedPwd = crypto.createHmac('sha256', secret).update(pwd).digest('hex');
-    sql.query(`SELECT * FROM user where email = "${email}"`, (err, res) => {
+    sql.query(`SELECT * FROM user where username = "${username}"`, (err, res) => {
         const User = res[0];
+        if (User.active == 0){
+            err = "INFO: User account is deactivated"
+            result(err, null); //returns null err and result object
+            return;
+        }
         if ((res.length && hashedPwd === User.encryptedPassword) && (User.active == 1)){
             console.log("INFO: Login details are correct");
             console.log("INFO: Username of current logged in user: ", User.username)
@@ -174,8 +189,6 @@ User.status = (username, status, result) => {
                         console.log(err)
                     }
                     else{
-                        // console.log('changed status', status)
-                        // console.log('succesfully updated active user to deactivated state')
                         result(null, res[0]); //returns null err and result object
                         return;
                     }
@@ -187,20 +200,31 @@ User.status = (username, status, result) => {
                         console.log(err)
                     }
                     else{
-                        // console.log('changed status', status)
-                        // console.log('succesfully updated deactivated user to active state')
                         result(null, res[0]); //returns null err and result object
                         return;
                     }
                 })
             }
-            // console.log(`INFO: listing user details`);
-            // console.log('changed status', status)
-            // result(null, res[0]); //returns null err and result object
             return;
         }
     });
 }
+
+
+//  called by exports.user_All in userController
+User.adminViewAll = (result) => {
+    sql.query(`SELECT username, email, encryptedPassword FROM user`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            result(null, res); //returns null err and result object
+            return;
+        }
+    });
+};
 
 
 module.exports = User;

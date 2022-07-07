@@ -1,7 +1,9 @@
 const User = require("../model/userModel");
 const session = require('express-session')
 // const sendToken = require("../auth")
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { response } = require("express");
+const sql = require("../database.js");
 
 
 exports.user_creation = (req, res) => {
@@ -11,7 +13,7 @@ exports.user_creation = (req, res) => {
         });
     }
     const user = new User({
-        username: req.body.username,
+        username: (req.body.username).trim(),
         email: req.body.email,
         password: req.body.password
     });
@@ -19,7 +21,7 @@ exports.user_creation = (req, res) => {
         if (err){
             res.status(500).send({
             message:
-                err.message || "Some error occurred while creating the User."
+                err
             });
         } else {
             res.status(200).send(data); // sends data to front-end
@@ -33,11 +35,11 @@ exports.user_All = (req, res) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                message: "Somehow, listing all users has encounted a problem"
+                    message: "Somehow, listing all users has encounted a problem"
                 });
             } else {
                 res.status(500).send({
-                message: "Somehow, listing all users has encounted a problem (2)"
+                    message: "Somehow, listing all users has encounted a problem (2)"
                 });
             }
         } else res.send(data); // sends data to front-end
@@ -50,18 +52,16 @@ exports.login = (req, res) => {
             message: "Content can not be empty!"
         });
     }
-    console.log(req.body.email, req.body.password);
-    const email = (req.body.email).toLowerCase();
-    console.log(email)
+    console.log(req.body.username, req.body.password);
+    const username = req.body.username;
+    console.log(username);
     const password = req.body.password;
-    User.authentication(email, password, (err, data) => {
-        if (err) {
-            console.log(err);
-            res.status(400).send("Invalid Credentials");
+    User.authentication(username, password, (err, data) => {
+        if (err){
+            res.status(500).send({ message: err });
         } else {
-            res.cookie("JWT", data.token)
+            res.cookie("JWT", data.token);
             res.send(data);
-            // res.status(200).redirect("/dashboard");
         }
     })
 };
@@ -77,7 +77,23 @@ exports.dashboard = (req, res) => {
     if (token) {
         jwt.verify(token, 'hello', async (err, decodedToken) => {
             const currentUser = decodedToken.username;
+            var adminView = false;
+
+            sql.query(`SELECT groupings FROM user WHERE username = ?`, [currentUser], (err, res) => {
+                const groupings = (res[0]).groupings;
+                console.log("INFO: Current user's groupings: ", groupings);
+                if (groupings.includes('ADMIN')) {
+                    adminView = true;
+                    console.log("oonga boonga adminView is", adminView)
+                }else{
+                    adminView = false;
+                    console.log("oonga boonga adminView is", adminView)
+                    // navigate("/login")
+                }
+            });
+
             console.log("INFO: Current user's decodedToken: ", decodedToken);
+            // res.send({currentUser: currentUser, adminView: adminView});
             res.send(currentUser);
         });
     } else {
@@ -175,8 +191,8 @@ exports.user_status = (req, res) => {
             message: "Content can not be empty!"
         });
     }
-    const status = (req.body.active);
-    const username = (req.body.username);
+    const status = req.body.active;
+    const username = req.body.username;
     console.log("INFO: req.cookies in user_status: ", req.cookies);
     const token = req.cookies.JWT;
     if (token) {
@@ -194,3 +210,64 @@ exports.user_status = (req, res) => {
 }
 
 
+exports.adminUserProfiles = (req, res) => {
+    User.adminViewAll((err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                message: "Somehow, listing all users has encounted a problem"
+                });
+            } else {
+                res.status(500).send({
+                message: "Somehow, listing all users has encounted a problem (2)"
+                });
+            }
+        } else res.send(data); // sends data to front-end
+    })
+};
+
+
+exports.adminUpdateUserPwd = (req, res) => {
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+    const password = req.body.password;
+    const username = req.body.username;
+    const token = req.cookies.JWT;
+    if (token) {
+        jwt.verify(token, 'hello', async (err, decodedToken) => {
+            console.log("INFO: Current user's decodedToken: ", decodedToken);
+            User.changePwd(username, password, (err, data) => {
+                console.log("INFO: Changed " + username + "'s password to " + password)
+                res.send(data)
+            })
+        });
+    } else {
+        console.log('JWT cookie not found')
+    }
+};
+
+
+exports.adminUpdateUserEmail = (req, res) => {
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+    const email = req.body.email;
+    const username = req.body.username;
+    const token = req.cookies.JWT;
+    if (token) {
+        jwt.verify(token, 'hello', async (err, decodedToken) => {
+            console.log("INFO: Current user's decodedToken: ", decodedToken);
+            User.updateEmail(username, email, (err, data) => {
+                console.log("INFO: Changed " + username + "'s email to " + email)
+                res.send(data)
+            });
+        });
+    } else {
+        console.log('JWT cookie not found')
+    }
+};

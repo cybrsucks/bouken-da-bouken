@@ -21,8 +21,6 @@ function Header() {
                 sessionStorage.setItem('username', "");
             }
         )
-        
-        // localStorage.clear();
         navigate("/login");
     }
 
@@ -36,12 +34,9 @@ function Header() {
                     </Link>
                     </div>
                     <div className="my-0 mr-md-auto font-weight-normal hover-link">
-                    {/* <Link to="/logout" className="text-white"> */}
                     <Link to="/">
                         <button onClick = {() => {Logout(), window.location.reload}}> Logout </button>
                     </Link>
-                        {/* <p> Logout </p> */}
-                    {/* </Link> */}
                     </div>
                 </div>
             </header>

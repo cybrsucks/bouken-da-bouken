@@ -1,7 +1,4 @@
 const sql = require("../database.js");
-const crypto = require('crypto');
-const jwt = require("jsonwebtoken");
-const secret = 'secret';
 
 const Group = function (group) {
     this.groupID = group.groupID;
@@ -18,9 +15,46 @@ Group.displayGroups = (result) => {
         }
         if (res.length) {
             result(null, res); //returns null err and result object
+            return; 
+        }
+    });
+};
+
+
+
+//  called by exports.groupChecklist in userController
+Group.usergroupList = (result) => {
+    sql.query(`SELECT username, groupings, active FROM user`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            result(null, res); //returns null err and result object
             return;
         }
     });
 };
+
+
+//  called by exports.groupUpdate in userController
+Group.assign = (groupings, username, result) => {
+    sql.query(`UPDATE user SET groupings = ? where username = ?`, [groupings, username], (err, res) => {
+        if (groupings == null || groupings == "" || groupings.length == 0) {
+            groupings = 'none'
+        }
+        console.log("INFO: changed groupings of user", username, " to ", groupings);
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            result(null, res); //returns null err and result object
+            return;
+        }
+    });
+}
 
 module.exports = Group;
