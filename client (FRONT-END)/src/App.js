@@ -17,6 +17,7 @@ import DisplayGroups from "./components/admin/DisplayGroups";
 import GroupChecklist from "./components/admin/GroupChecklist";
 import GroupMgmt from "./components/admin/GroupMgmt";
 import UpdateUserProfile from "./components/admin/UpdateUserProfile";
+import CreateGroup from "./components/admin/CreateGroup";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/groups/displayGroups" element={<DisplayGroups /> }/>
             <Route path="/groups/groupChecklist" element={<GroupChecklist /> }/>
             <Route path="/groups/manage" element={<GroupMgmt /> }/>
+            <Route path="/group/create" element={<CreateGroup />} />
         </Route>
       </Routes>
     </div></>

@@ -57,4 +57,28 @@ Group.assign = (groupings, username, result) => {
     });
 }
 
+Group.create = (groupName, result) => {
+    sql.query('SELECT COUNT(groupName) as countGrpName FROM studydb.group WHERE groupName = ?', [groupName], (err, res) => {
+        console.log("Creating group check... number of occurences of groupName", res[0].countGrpName)
+        if (res[0].countGrpName > 0){
+            err = 'error: duplicate entry in database'
+            result(err, null);
+            return;
+        }else{
+            sql.query(`INSERT INTO studydb.group (groupName) VALUES (?)`, [groupName], (err, res) => {
+                if (err) {
+                    err = "Something went wrong with creating a new group"
+                    result(err, null);
+                    return;
+                }
+                if (res.length) {
+                    result(null, res); //returns null err and result object
+                    return;
+                }
+            });
+        }
+    })
+}
+
+
 module.exports = Group;
