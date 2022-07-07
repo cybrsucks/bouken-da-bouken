@@ -24,6 +24,14 @@ You may also see any lint errors in the console.
 `cd node-react-mysql/client`
 `npm start` -- starts react app
 
+Test admin/user views
+- http://localhost:3000/user/create
+- http://localhost:3000/user/displayStatus
+- http://localhost:3000/user/updateUserProfile
+
+- http://localhost:3000/groups/groupChecklist
+- http://localhost:3000/groups/displayGroups
+
 ### Tags:
 
 NodeJS
