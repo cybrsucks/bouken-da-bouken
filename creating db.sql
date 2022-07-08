@@ -21,15 +21,15 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`)  
 VALUES (1, 'admin', 'admin@min.com', '301a25fb3f7d45a31cfaf7819f7fee4b3bd8318fdc14f232d37504f2371ebac5', 'ADMIN,G1,G2', 1);
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
-VALUES (2, 'user1', 'user1@grpOne.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G1', 1);
+VALUES (2, 'user1', 'user1@grpOne.com', '301a25fb3f7d45a31cfaf7819f7fee4b3bd8318fdc14f232d37504f2371ebac5', 'G1', 1);
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
-VALUES (3, 'user2', 'user2@grpOne.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G1,G2', 1);
+VALUES (3, 'user2', 'user2@grpOne.com', '301a25fb3f7d45a31cfaf7819f7fee4b3bd8318fdc14f232d37504f2371ebac5', 'G1,G2', 1);
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
-VALUES (4, 'user3', 'user3@grpTwo.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G2', 1);
+VALUES (4, 'user3', 'user3@grpTwo.com', '301a25fb3f7d45a31cfaf7819f7fee4b3bd8318fdc14f232d37504f2371ebac5', 'G2', 1);
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
-VALUES (5, 'user4', 'user4@grpTwo.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G2', 0);
+VALUES (5, 'user4', 'user4@grpTwo.com', '301a25fb3f7d45a31cfaf7819f7fee4b3bd8318fdc14f232d37504f2371ebac5', 'G2', 0);
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
-VALUES (6, 'user5', 'user5@grpThree.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G3', 0);
+VALUES (6, 'user5', 'user5@grpThree.com', '301a25fb3f7d45a31cfaf7819f7fee4b3bd8318fdc14f232d37504f2371ebac5', 'G3', 0);
 
 -- UPDATE user SET role = CONCAT(groupings, ',intelligent') where username = 'user55';
 

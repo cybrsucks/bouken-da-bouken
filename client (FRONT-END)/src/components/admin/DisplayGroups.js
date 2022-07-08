@@ -25,7 +25,7 @@ function DisplayGroups() {
     if (adminView == true){
         return(
             <div className="information">
-                <h5> <span> usergroups </span> </h5>
+                <h5> <span> Admin: Display User Groups </span> </h5>
                     <table className="table borderBlack" style={{'textAlign': 'center', 'width': '20%'}}>
                         <thead>
                         <tr className="borderBlack">

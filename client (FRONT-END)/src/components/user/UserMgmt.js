@@ -36,6 +36,9 @@ function UserMgmt() {
                                 </Link>
                             </div> 
                         </div>
+                    </div>
+                    <hr></hr>
+                    <div className="row align-items-center" style={{'height': '100px', 'padding-bottom': '15px'}}>
                         <div className="col">
                             <div>
                                 <Link to="/user/create" className="dashboard-link">

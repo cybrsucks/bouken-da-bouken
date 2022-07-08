@@ -65,7 +65,10 @@
   margin: 5px;
   font-size: 14px;
   font-family: Roboto-Regular, "Courier New", monospace;
+}
 
+label , h6{
+  font-family: Roboto-Regular, "Courier New", monospace;
 }
 
 .hover-link svg {
