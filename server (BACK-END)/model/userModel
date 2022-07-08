@@ -71,29 +71,37 @@ User.selectAll = (result) => {
 User.authentication = (username, pwd, result) => {
     hashedPwd = crypto.createHmac('sha256', secret).update(pwd).digest('hex');
     sql.query(`SELECT * FROM user where username = "${username}"`, (err, res) => {
-        const User = res[0];
-        if (User.active == 0){
-            err = "INFO: User account is deactivated"
+        // console.log("res", res.length)
+        if (res.length == 0) {
+            err = "INFO: Username/Password is incorrect";
             result(err, null); //returns null err and result object
             return;
-        }
-        if ((res.length && hashedPwd === User.encryptedPassword) && (User.active == 1)){
-            console.log("INFO: Login details are correct");
-            console.log("INFO: Username of current logged in user: ", User.username)
-            // creates JWT token
-            const token = jwt.sign({ username: User.username }, process.env.JWT, {expiresIn: "2h"})
-            // save user token
-            User.token = token
-            console.log("INFO: JWT token of " + User.username + ": " + token);
-            // console.log("User object: " + User); // refers to the User object [Object object] containing * info for the user found in db
-            // console.log(res);  
-            result(null, res[0]); //returns null err and result object
-            return;
-        } else {
-            // console.log("INFO: Username/Password is incorrect")
-            err = "INFO: Username/Password is incorrect";
-            result(err, null);
-            return;
+        }else{
+            const User = res[0];
+            if (User.active == 0){
+                // err = "INFO: User account is deactivated"
+                err = "INFO: Username/Password is incorrect";
+                result(err, null); //returns null err and result object
+                return;
+            }
+            if ((res.length && hashedPwd === User.encryptedPassword) && (User.active == 1)){
+                console.log("INFO: Login details are correct");
+                console.log("INFO: Username of current logged in user: ", User.username)
+                // creates JWT token
+                const token = jwt.sign({ username: User.username }, process.env.JWT, {expiresIn: "2h"})
+                // save user token
+                User.token = token
+                console.log("INFO: JWT token of " + User.username + ": " + token);
+                // console.log("User object: " + User); // refers to the User object [Object object] containing * info for the user found in db
+                // console.log(res);  
+                result(null, res[0]); //returns null err and result object
+                return;
+            } else {
+                // console.log("INFO: Username/Password is incorrect")
+                err = "INFO: Username/Password is incorrect";
+                result(err, null);
+                return;
+            }
         }
     });
 };

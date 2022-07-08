@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Axios from "axios"
 
@@ -6,13 +6,17 @@ function Dashboard() {
 
     // check for admin/user
     const [adminView, setAdminView] = useState(false)
-    Axios.get("http://localhost:3001/dashboard",  { withCredentials: true })
+    useEffect(() => {
+        Axios.post("http://localhost:3001/checkgroup", {groupNeeded : 'ADMIN'}, { withCredentials: true })
         .then((response) => {
-            document.getElementById("welcomeBanner").innerHTML = response.data;
-            if (response.data == 'admin'){
+            // console.log(response)        
+            document.getElementById("welcomeBanner").innerHTML = sessionStorage.getItem("username");
+            if (response.data == true ){
                 setAdminView(true);
             }
         })
+    },[])
+
 
     if (adminView == true){
         return(

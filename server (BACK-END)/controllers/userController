@@ -68,26 +68,26 @@ exports.login = (req, res) => {
 };
 
 
-exports.dashboard = (req, res) => {
+exports.checkgroup = (req, res) => {
     // const jwt_cookie = req.cookies.JWT;
     // console.log("\n")
     // console.log("INFO: req.cookies: ", req.cookies);
     // res.end()
     const token = req.cookies.JWT;
+
     // console.log(token)
     if (token) {
         jwt.verify(token, process.env.JWT, async (err, decodedToken) => {
             const currentUser = decodedToken.username;
-            var adminView = false;
 
-            sql.query(`SELECT groupings FROM user WHERE username = ?`, [currentUser], (err, res) => {
-                const groupings = (res[0]).groupings;
+            sql.query(`SELECT groupings FROM user WHERE username = ?`, [currentUser], (err, result) => {
+                const groupings = (result[0]).groupings;
                 // console.log("INFO: Current user's groupings: ", groupings);
-                if (groupings.includes('ADMIN')) {
-                    adminView = true;
+                if (groupings.includes(req.body.groupNeeded)) {
+                    res.send(true);
                     // console.log("adminView is", adminView)
                 }else{
-                    adminView = false;
+                    res.send(false)
                     // console.log("adminView is", adminView)
                     // navigate("/login")
                 }
@@ -95,7 +95,7 @@ exports.dashboard = (req, res) => {
 
             // console.log("INFO: Current user's decodedToken: ", decodedToken);
             // res.send({currentUser: currentUser, adminView: adminView});
-            res.send(currentUser);
+          
         });
     } else {
         console.log('JWT cookie not found')

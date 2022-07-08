@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom"
 
 // My Components
 import Login from "./components/Login"
-import GetUsers from "./components/admin/GetUsers"
 import CreateUser from "./components/admin/CreateUser"
 import Header from "./components/Header"
 import UpdateEmail from "./components/user/UpdateEmail"
@@ -12,7 +11,7 @@ import ChangePwd from "./components/user/ChangePwd"
 import Dashboard from "./components/Dashboard";
 import UserMgmt from "./components/user/UserMgmt";
 import ProtectedRoute from "./components/ProtectedRoute";
-import DisplayUserStatus from "./components/admin/DisplayUserStatus";
+import UserStatus from "./components/admin/UserStatus";
 import DisplayGroups from "./components/admin/DisplayGroups";
 import GroupChecklist from "./components/admin/GroupChecklist";
 import GroupMgmt from "./components/admin/GroupMgmt";
@@ -26,7 +25,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />     
         <Route path="/login" element={<Login />} />
-        <Route path="/getUsers" element={<GetUsers />} />
         
         <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
@@ -36,7 +34,7 @@ function App() {
             
             <Route path="/user/manage" element={<UserMgmt />} />
             <Route path="/user/create" element={<CreateUser />} />
-            <Route path="/user/displayStatus" element={<DisplayUserStatus />} />
+            <Route path="/user/displayStatus" element={<UserStatus />} />
             <Route path="/user/updateUserProfile" element={<UpdateUserProfile />} />
             <Route path="/groups/displayGroups" element={<DisplayGroups /> }/>
             <Route path="/groups/groupChecklist" element={<GroupChecklist /> }/>

@@ -5,9 +5,12 @@ function CreateUser() {
 
     // check for admin/user
     const [adminView, setAdminView] = useState(false)
-    Axios.get("http://localhost:3001/dashboard",  { withCredentials: true })
+    
+    Axios.post("http://localhost:3001/checkgroup", {groupNeeded : 'ADMIN'}, { withCredentials: true })
         .then((response) => {
-            if (response.data == 'admin'){
+            // console.log(response)
+        
+            if (response.data == true ){
                 setAdminView(true);
             }
         })

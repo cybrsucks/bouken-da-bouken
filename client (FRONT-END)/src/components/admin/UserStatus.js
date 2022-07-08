@@ -1,25 +1,26 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import Axios from "axios"
 
 function DisplayUserStatus() {
-
-    // check for admin/user
     const [adminView, setAdminView] = useState(false)
-    Axios.get("http://localhost:3001/dashboard",  { withCredentials: true })
+    const [userList, setUserList] = useState([]);
+    useEffect(() => {
+        // check for admin/user
+        Axios.post("http://localhost:3001/checkgroup", {groupNeeded : 'ADMIN'}, { withCredentials: true })
         .then((response) => {
-            if (response.data == 'admin'){
+            // console.log(response)
+        
+            if (response.data == true ){
                 setAdminView(true);
             }
         })
-
-    const [userList, setUserList] = useState([]);
-
-    Axios.get("http://localhost:3001/user/displayStatus", {
+        Axios.get("http://localhost:3001/user/displayStatus", {
             withCredentials: true
         })
         .then((response) => {
             setUserList(response.data);
         })
+    },[])
 
     function updateStatus(username, status) {
         if (status == 1) {
@@ -54,19 +55,26 @@ function DisplayUserStatus() {
         return(
             <div className="information">
                 <h5> <span> Admin: Update User Status </span> </h5>
-
-                {userList.map((val) => {
-                return (
-                    <form key={val.username}>
-                        <div className="user">
-                            <p><span style={{fontWeight: "bold"}}>Username:</span> {val.username}</p>
-                            <p><span style={{fontWeight: "bold"}}>Email:</span> {val.email}</p>
-                            <p><span style={{fontWeight: "bold"}}>Status:</span> {val.active == 1 ? '🟢' : '🔴' } </p>
-                            <button style ={{"marginLeft": "450px"}} onClick= {() => {updateStatus(val.username, val.active)}}> {val.active == 1 ? 'Deactivate' : 'Activate'} </button>
-                        </div>
-                    </form>
-                );
-                })}
+                <table style ={{"textAlign": 'center'}}>
+                    <tbody>
+                        <tr>
+                            <th> Username </th>
+                            <th> Email </th>
+                            <th> Status </th>
+                            <th> Button </th>
+                        </tr>
+                        {userList.map((val) => {
+                            return (
+                                <tr key={val.username}>
+                                    <td>{val.username}</td>
+                                    <td>{val.email ? val.email : '-'}</td>
+                                    <td>{val.active == 1 ? '🟢' : '🔴' }</td>
+                                    <td><button onClick= {() => {updateStatus(val.username, val.active)}}> {val.active == 1 ? 'Deactivate' : 'Activate'} </button></td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
             </div> 
         )
     }else{

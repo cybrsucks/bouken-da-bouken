@@ -6,7 +6,7 @@ router.post("/user/create", userController.user_creation); //working
 router.get("/getUsers", userController.user_All); //working
 router.post("/", userController.login); // working
 router.post("/login", userController.login); // working
-router.get("/dashboard", userController.dashboard); // working
+router.post("/checkgroup", userController.checkgroup); // working
 router.get("/logout", userController.logout); // working
 router.get("/user/manage"); // working
 router.get("/userDetails", userController.user_details); // working

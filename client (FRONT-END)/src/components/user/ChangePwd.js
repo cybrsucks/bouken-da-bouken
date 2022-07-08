@@ -5,7 +5,7 @@ function ChangePwd() {
 
     Axios.get("http://localhost:3001/userDetails", { withCredentials: true })
         .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             // console.log("a21");
             document.getElementById("userDeets-username").innerHTML = response.data.username;
             // document.getElementById("userDeets-password").innerHTML = (response.data.encryptedPassword);
