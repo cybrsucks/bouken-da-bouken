@@ -57,7 +57,7 @@ function ProfilePartial({user}) {
             <div className="user">
                 <p><span style={{fontWeight: "bold"}}>Username:</span> {user.username}</p>
                 <p><span style={{fontWeight: "bold"}}>Current Email:</span> {user.email}</p>
-                <p><span style={{fontWeight: "bold"}}>Current Password:</span> {user.encryptedPassword} </p>
+                <p><span style={{fontWeight: "bold"}}>Current Password:</span> *****{(user.encryptedPassword).slice(-4, -1)} </p>
                 <div> 
                     <input type="text" placeholder="Email" onChange={(event) => { setNewEmail(event.target.value); }}/>
                     <button onClick={() => { UpdateEmail(), window.location.reload(false)}}> Update Email </button>

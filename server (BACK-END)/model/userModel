@@ -81,7 +81,7 @@ User.authentication = (username, pwd, result) => {
             console.log("INFO: Login details are correct");
             console.log("INFO: Username of current logged in user: ", User.username)
             // creates JWT token
-            const token = jwt.sign({ username: User.username }, "hello", {expiresIn: "2h"})
+            const token = jwt.sign({ username: User.username }, process.env.JWT, {expiresIn: "2h"})
             // save user token
             User.token = token
             console.log("INFO: JWT token of " + User.username + ": " + token);

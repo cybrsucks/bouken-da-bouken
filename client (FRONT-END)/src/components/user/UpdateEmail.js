@@ -11,19 +11,33 @@ function UpdateEmail() {
             document.getElementById("userDeets-email").innerHTML = response.data.email;
     })
 
+    function ValidateEmail(mail) {
+        var email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (mail.match(email)) {
+            return (true)
+        }else{
+            // alert("You have entered an invalid email address!")
+            return (false)
+        }
+    }
+
     const [newEmail, setNewEmail] = useState('');
 
     const UpdateEmail = () => {
-        Axios.post("http://localhost:3001/user/updateEmail", { 
-            email: newEmail
-        },{ withCredentials: true })
-            .then((response) => {
-                // console.log("this here: " + response.data)
-                alert("email updated successfully")
-            }
-        ).catch ((err) => {
-            console.log(err)
-        })
+        if (ValidateEmail(newEmail) == false) {
+            alert("You have entered an invalid email address!")
+        }else{
+            Axios.post("http://localhost:3001/user/updateEmail", { 
+                email: newEmail
+            },{ withCredentials: true }) 
+                .then((response) => {
+                    // console.log("this here: " + response.data)
+                    alert("email updated successfully")
+                }
+            ).catch ((err) => {
+                console.log(err)
+            })
+        }
     } 
 
     return (
@@ -32,7 +46,7 @@ function UpdateEmail() {
         <h6> Username : <span id="userDeets-username">  </span> </h6>
         <h6> Email : <span id="userDeets-email">  </span> </h6>
         <div> 
-            <input type="text" placeholder="Email" onChange={(event) => { setNewEmail(event.target.value); }}/>
+            <input type="email" placeholder="Email" onChange={(event) => { setNewEmail(event.target.value); }}/>
             {/* <button onClick={() => { UpdateEmail()}}> Update </button> */}
             <button onClick={() => { UpdateEmail(), window.location.reload(false)}}> Update Email </button>
 

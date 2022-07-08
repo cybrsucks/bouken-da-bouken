@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-
-const config = process.env;
+const dotenv = require('dotenv')
+dotenv.config({ path: "./config/config.env" });
 
 // const verifyToken = (req, res, next) => {
 //     const token =
@@ -26,7 +26,7 @@ exports.sendToken = (user, statusCode, res) => {
     user.getJwtToken = function () {
         return jwt.sign({
             username: user.username
-        }, "hello", {
+        }, process.env.JWT, {
             expiresIn: "2h"
         })
     }
@@ -53,7 +53,7 @@ exports.sendToken = (user, statusCode, res) => {
 const checkUser = (req, res, next) => {
     const token = req.cookies.JWT;
     if (token) {
-        jwt.verify(token, 'hello', async (err, decodedToken) => {
+        jwt.verify(token, process.env.JWT, async (err, decodedToken) => {
             if (err) {
                 res.locals.user = null;
                 next();

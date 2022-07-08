@@ -24,13 +24,14 @@ function GroupChecklist() {
     )
 
     if (adminView == true){
+        // console.log(userList)
         return(
             <div className="information">
                 <h5> <span> user details </span> </h5>
 
                 {userList.map((val) => { // <UserPartial user={val} key={val}/>}
                 return (
-                    <div key={val}>
+                    <div key={val.username}>
                     <UserPartial user={val}/>
                     </div>
                 );

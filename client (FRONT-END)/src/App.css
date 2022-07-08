@@ -22,16 +22,32 @@
 }
 
 .information button { 
-  width: 200px;
+  /* width: 200px;
+  height: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px; */
+  font-size: 13px;
+  width: 150px;
   height: 30px;
   margin-top: 15px;
   margin-bottom: 15px;
+  margin-left: 15px;
 }
 
 .information button:hover { 
   cursor: pointer;
   background-color: grey;
   color: white;
+}
+
+@font-face {
+  font-family: Roboto-Regular;
+  src: url(C:\Users\commonuser\Documents\fonts\Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: Delmon Delicate;
+  src: url(C:\Users\commonuser\Documents\fonts\DelmonDelicate.ttf);
 }
 
 .user{
@@ -41,13 +57,14 @@
   margin: 10px;
   display: flex;
   padding: 10px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: Roboto-Regular, Courier, monospace;
   flex-direction: column;
 }
 
 .user p {
   margin: 5px;
-  font-size: 12px;
+  font-size: 14px;
+  font-family: Roboto-Regular, "Courier New", monospace;
 
 }
 

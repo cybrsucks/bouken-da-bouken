@@ -12,24 +12,39 @@ function CreateUser() {
             }
         })
 
+    function CheckPassword(inputtxt) { 
+        var passw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/;
+        if(inputtxt.match(passw)) { 
+            // alert('Correct, try another...')
+            return true;
+        }else{ 
+            // alert('Wrong...!')
+            return false;
+        }
+    }
+
     const [username, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const CreateUser = () => {
-    Axios.post('http://localhost:3001/user/create', {
-        username: username,
-        email: email,
-        password: password,
-        }).then(
-            () => {
-                console.log("Success");
-                alert("Success!");
-        }).catch(
-            (err) => {
-                // console.log(err.response.data.message);
-                alert(err.response.data.message);
-        });
+        if (CheckPassword(password) == false) {
+            alert('wrong password format! Password length must meet the length of min 8, max 10 characters, and must comprise of at least 1 lower and uppercase letter, number, and symbols')
+        }else{
+            Axios.post('http://localhost:3001/user/create', {
+                username: username,
+                email: email,
+                password: password,
+            }).then(
+                () => {
+                    console.log("Success");
+                    alert("Success!");
+            }).catch(
+                (err) => {
+                    // console.log(err.response.data.message);
+                    alert(err.response.data.message);
+            });
+        }
     };
     
 
@@ -39,11 +54,11 @@ function CreateUser() {
                 <h5> <span> Admin: Create new user </span> </h5>
                 <div className="information">
                 <label>Username:</label>
-                    <input type="text" onChange={(event) => { setName(event.target.value) }} />
+                    <input type="text" onChange={(event) => { setName(event.target.value) }} required/>
                 <label>Email:</label>
                     <input type="email" onChange={(event) => { setEmail(event.target.value) }} />
                 <label>Password:</label>
-                    <input type="text" onChange={(event) => { setPassword(event.target.value) }} />
+                    <input type="text" onChange={(event) => { setPassword(event.target.value) }} required/>
                 <button onClick={CreateUser}>Add User</button>
                 </div>
             </div>

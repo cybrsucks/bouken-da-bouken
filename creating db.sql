@@ -31,7 +31,7 @@ VALUES (5, 'user4', 'user4@grpTwo.com', 'e5584918cd080eecde3a8847976918746781718
 INSERT INTO `user` (`id`, `username`, `email`, `encryptedPassword`, `groupings`, `active`) 
 VALUES (6, 'user5', 'user5@grpThree.com', 'e5584918cd080eecde3a8847976918746781718352dd0ee5d998764e349d8a8d', 'G3', 0);
 
--- UPDATE user SET role = CONCAT(role, ',intelligent') where username = 'user55';
+-- UPDATE user SET role = CONCAT(groupings, ',intelligent') where username = 'user55';
 
 delete from user where id > 0;
 select * from studydb.group;

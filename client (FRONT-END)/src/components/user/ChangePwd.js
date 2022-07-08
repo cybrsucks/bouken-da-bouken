@@ -26,7 +26,6 @@ function ChangePwd() {
     const [newPassword, setNewPassword] = useState('');
 
     const ChangePwd = () => {
-
         if (CheckPassword(newPassword) == false) {
             alert('wrong password format! Password length must meet the length of min 8, max 10 characters, and must comprise of at least 1 lower and uppercase letter, number, and symbols')
         }else{
@@ -51,7 +50,7 @@ function ChangePwd() {
         <h6> Username : <span id="userDeets-username">  </span> </h6>
         <h6> Password : *****<span id="userDeets-password"> </span> </h6>
         <div> 
-            <input type="text" placeholder="Password" onChange={(event) => { setNewPassword(event.target.value); }}/>
+            <input type="password" placeholder="Password" onChange={(event) => { setNewPassword(event.target.value); }}/>
             <button onClick={() => { ChangePwd(), window.location.reload(false)}}> Change Password </button>
         </div>
         </div> 
