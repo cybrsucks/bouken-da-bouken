@@ -4,10 +4,11 @@ import Axios from "axios"
 function UserPartial({user}) {
     const [groupArray, setGroupArray] = useState([]);
     const [currentGroup, setCurrentGroup] = useState(user.groupings);
+    const [showCheckbox, setShowCheckbox] = useState(false);
 
     // const UpdateGroup = (e) => {
     //     e.preventDefault();
-    const UpdateGroup = () => {
+    const UpdateGroup = (user) => {
         console.log(user); // user object
         console.log(currentGroup) // updated state of userGroupings
         const userGroupings = user.groupings; // original state of userGroupings
@@ -46,39 +47,37 @@ function UserPartial({user}) {
             setGroupArray(longGroup)
         })
     })
-
-    function popUpdate() {
-        var popup = document.getElementById("myPopup");
-        popup.classList.toggle("show");
+    
+    const handleShowCheckbox = (e) => {
+        e.preventDefault()
+        setShowCheckbox(true)
     }
 
+
     return (
+        
         <form key={user.username}>
             <div className="user">
                 <p><span style={{fontWeight: "bold"}}>Username:</span> {user.username}</p>
                 <p><span style={{fontWeight: "bold"}}>Status:</span> {user.active == 1 ? '🟢' : '🔴' } </p>
                 {/* edit */}                                        
-                    <div className="popup" onClick={popUpdate}>Update User Groupings
+                <button onClick={handleShowCheckbox}>Update User Group</button>
                         {/* anything below here is in the popup window */}
-                        <span className="popuptext" id="myPopup">
-                            <table>
-                                <tbody>
+                        {showCheckbox ? <span className="popuptext" id="myPopup">
                                 {groupArray.map((group) => {
                                     return(
-                                        <tr key={group}>
-                                            <th style={{'textAlign': 'center', 'fontSize': '13px'}}> {group} </th>
-                                            
-                                            <td> <input type="checkbox" style={{'width': '20px', 'height': '20px', 'margin': '5px'}} value={group} defaultChecked={user.groupings.split(",").includes(group)} key={user} onChange={onChangeHandler}/> </td>
-                                        </tr>
+                                        <div className="apples">
+                                        <label>{group}</label>
+                                        <input type="checkbox" value={group} onChange={onChangeHandler} defaultChecked={user.groupings.split(",").includes(group)}></input>
+                                        </div>
                                         
                                     )
                                 })} 
-                                </tbody>
-                            </table>
-                            <button type="submit" onClick={UpdateGroup}>Update</button>
+                            <button type="submit" onClick={() => {UpdateGroup(user)}}>Update</button>
+                            <button onClick = {() => {setShowCheckbox(false)}}>Cancel</button> 
+                            <p>Changing Group for: {user.username}</p>
                         </span>
-                        {/* anything above here is in the popup window */}
-                    </div>
+                        : <></>}
             </div>
         </form>
     )

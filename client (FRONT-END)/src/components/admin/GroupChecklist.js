@@ -31,7 +31,7 @@ function GroupChecklist() {
         return(
             <div className="information">
                 <h5> <span> Admin: Update User Groupings </span> </h5>
-
+                {console.log (userList)}
                 {userList.map((val) => { // <UserPartial user={val} key={val}/>}
                 return (
                     <div key={val.username}>
